@@ -55,8 +55,6 @@ def main():
     doc = nlp(raw_text)
     sentences = list(doc.sents)
     print(f"\tExtracted {len(sentences)} sentences.")
-
-    # Look for PERSON + ORGANIZATION entity pairs
     print("\nChecking for entity pairs (PERSON + ORGANIZATION):")
     for sent in sentences:
         ents = [ent for ent in sent.ents]
