@@ -4,7 +4,6 @@ import spacy
 from googleapiclient.discovery import build
 
 API_KEY = 'AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY'
-GEMINI_KEY = 'AIzaSyBzTTV9qedmDGr-IjLhNYT9pzOAHpHOOIc'
 
 CX = 'd29acf7ff2d2f40a9'
 
