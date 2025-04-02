@@ -3,6 +3,11 @@ import sys
 from bs4 import BeautifulSoup
 import spacy
 from googleapiclient.discovery import build
+import google.generativeai as genai
+from spacy_help import get_entities, create_entity_pairs
+import time
+
+
 
 
 # We expect 5 additional arguments:
@@ -21,21 +26,50 @@ def google_search(API_KEY,CX, query):
     results = res.get("items", [])
     return [item['link'] for item in results]
 
+
+
 def fetch_page_text(url):
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        response = requests.get(url, headers=headers, timeout=5)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, 'html.parser')
-        return soup.get_text(separator=' ', strip=True)
+        response = requests.get(url)
+        content = response.text
+        soup = BeautifulSoup(content, 'html.parser')
+        for tag in soup(['table']):
+            tag.decompose()
+            
+       
+        raw_text = soup.get_text(' ',strip=True)
+        if len(raw_text) > 10000:
+                print(f"\tTrimming webpage content from {len(raw_text)} to 10000 characters")
+                raw_text = raw_text[:10000]
+        return raw_text
     except Exception as e:
         print(f"\t[!] Failed to fetch {url}: {e}")
         return ""
+     
+
+
+def get_gemini(prompt, model_name, max_tokens,temperature,top_p,top_k):
+    model = genai.GenerativeModel(model_name)
+    generation_config = genai.types.GenerationConfig(
+        max_output_tokens=max_tokens,
+        temperature=temperature,
+        top_p=top_p,
+        top_k=top_k
+    )
+    time.sleep(5)
+    response = model.generate_content(prompt, generation_config=generation_config)
+
+    return response.text.strip() if response.text else "No response received"
+    
+
 
 def main():
 
     API_KEY = 'AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY'
     CX = 'd29acf7ff2d2f40a9'
+    GEMINI_API_KEY = 'AIzaSyBzTTV9qedmDGr-IjLhNYT9pzOAHpHOOIc'  # Substitute your own key here
+    genai.configure(api_key=GEMINI_API_KEY)
+
     method = sys.argv[1]
     r = int(sys.argv[2])     
     t = float(sys.argv[3])   
@@ -62,8 +96,25 @@ def main():
     print(f"Relation\t= {relation}\nThreshold\t= {t}\nQuery    \t= {seed_query}\n# of Tuples     = {k}")
 
     print("Loading necessary libraries...\n")
+
     nlp = spacy.load("en_core_web_sm")
 
+    relation_pairs = {
+                1: ["PERSON", "ORGANIZATION"],  # Schools_Attended
+                2: ["PERSON", "ORGANIZATION"],  # Work_For
+                3: ["PERSON", "LOCATION"],      # Live_In
+                4: ["ORGANIZATION", "PERSON"]   # Top_Member_Employees
+            }
+    
+    relation_prompts = {
+        1:"Return any found schools-attended relationships from the following sentence. "
+        "Only return relations where the subject is a person and the object is a school or university name. "
+        "Return them in the format Person ; School-Attended on its own line.",
+        2:"Return any found work-for relationships. \n Return them in the format Person ; Place of work on its own line."
+
+    }
+
+    target_types = relation_pairs[r]
 
     X = set() #initialize set
     processed = set()
@@ -73,7 +124,6 @@ def main():
         print("No search results found.")
         return
 
-    urls = urls[:1]
     index = 1 
     for url in urls:
         if url not in processed:
@@ -82,18 +132,65 @@ def main():
 
             raw_text = fetch_page_text(url)
 
-            if len(raw_text) > 10000:
-                print(f"\tTrimming webpage content from {len(raw_text)} to 10000 characters")
-                raw_text = raw_text[:10000]
-
             print(f"\tWebpage length (num characters): {len(raw_text)}")
 
             print("\tAnnotating the webpage using spaCy...")
             doc = nlp(raw_text) #use spacy
-            sentences = list(doc.sents) # get entities
+            sentences = list(doc.sents)
+            print(f"\tExtracted {len(sentences)} sentences. Processing each one for correct entity pairings...")
             
-            print(f"\tExtracted {len(sentences)} sentences.")
+            extracted = 0 
+            for i, sent in enumerate(sentences):
+                pairs = create_entity_pairs(sent, target_types)
+                if not pairs:
+                    continue
+                filtered_pairs = []
+                for tokens, e1, e2 in pairs:
+                    e1_type = e1[1]
+                    e2_type = e2[1]
+                    subj_type, obj_type = target_types
+
+                    if ((e1_type == subj_type and e2_type == obj_type) or (e1_type == obj_type and e2_type == subj_type)):
+                        filtered_pairs.append((e1, e2))
+
+                if filtered_pairs:
+                    prompt=f"{relation_prompts[r]} Sentence: {sent} Do not return anything else."
+                    model_name = "gemini-2.0-flash"
+                    max_tokens = 100
+                    temperature = 0.2
+                    top_p = 1
+                    top_k = 32
+                    try:
+                        response_text = get_gemini(prompt, model_name, max_tokens, temperature, top_p, top_k)
+                    except Exception as e:
+                        print(f"\t[!] Gemini API error: {e}")
+                        continue
+                    if (i + 1) % 5 == 0 or i == len(sentences) - 1:
+                        print(f"\n\tProcessed {i + 1} / {len(sentences)} sentences")
+
+                    if ";" in response_text:
+                        lines = response_text.split('\n')
+                        for line in lines:
+                            if ";" in line:
+                                relation = line.split(";")
+                                subject = relation[0].strip()
+                                obj = relation[1].strip()                       
+                        print(f"\n=== Extracted Relation ===")
+                        print(response_text)
+                        print(f"\nSentence: {sent} ")
+                        print(f"Subject: {subject} Object: {obj}")
+                        if ((subject,obj) in X):
+                            print("Duplicate. Ignoring this.")
+                        else:
+                            print(f"\nAdding to set of extracted relations")
+                            X.add((subject, obj, 1.0))
+                            extracted +=1
+                        print(f"\t\t==========")
+                        
+            print(f"Extracted annotations for {extracted} out of a total {len(sentences)} for this website.")
+            print(f"Relations extracted from this website:{extracted}")
             index+=1
+        
 
 
 if __name__ == "__main__":
