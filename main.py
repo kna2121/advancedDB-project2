@@ -60,7 +60,6 @@ def get_gemini(prompt, model_name, max_tokens,temperature,top_p,top_k):
     response = model.generate_content(prompt, generation_config=generation_config)
 
     return response.text.strip() if response.text else "No response received"
-    
 
 
 def main():
@@ -107,10 +106,25 @@ def main():
             }
     
     relation_prompts = {
-        1:"Return any found schools-attended relationships from the following sentence. "
-        "Only return relations where the subject is a person and the object is a school or university name. "
-        "Return them in the format Person ; School-Attended on its own line.",
-        2:"Return any found work-for relationships. \n Return them in the format Person ; Place of work on its own line."
+        1:"Identify any found school attended relationships in the sentence below. "
+        "Return only if the subject is a person and the object is a school or university name."
+        "Return output in the format Person ; School on its own line. Include the full name of the school, including 'college' or 'university' "
+        "For example, if the sentence was: Jeff Bezos graduated from Princeton, the response should be: Jeff Bezos ; Princeton University.",
+        
+        2:"Identify any found work-for relationships in the sentence below. \n "
+        "Return only if the subject is a person and the object is a place of work."
+        "Return output in the format Person ; Place of work on its own line. "
+        "For example, if the sentence was: Alec Radford is currently working with OpenAi, the response should be Alec Radford ; OpenAi",
+
+        3:"Identify any live-in relationships in the sentence below.\n "
+        "Return only if the subject is a person and the object is a location (city or country)."
+        "Return output in the format Person ; Location where they live on its own line. "
+        "For example if the sentence was: Mariah Carey moved to New York City last year, the response should be Mariah Carey ; New York City",
+
+        4:"Identify any top-member or high-ranking employee relationships in the sentence below."
+        "Return nly  if the subject is an ORGANIZATION and the object is a PERSON. "
+        "Return them in the format: Organization ; Person — on its own line. "
+        "For example if the sentence was: Jensen Huang is the CEO of Nvidia, the response should be Nvidia ; Jensen Huang",
 
     }
 
@@ -125,6 +139,7 @@ def main():
         return
 
     index = 1 
+    total_extracted=0
     for url in urls:
         if url not in processed:
             print(f"\nURL ({index} / {len(urls)}): {url}")
@@ -139,7 +154,8 @@ def main():
             sentences = list(doc.sents)
             print(f"\tExtracted {len(sentences)} sentences. Processing each one for correct entity pairings...")
             
-            extracted = 0 
+            extracted_count = 0 
+            annotated=0
             for i, sent in enumerate(sentences):
                 pairs = create_entity_pairs(sent, target_types)
                 if not pairs:
@@ -154,7 +170,7 @@ def main():
                         filtered_pairs.append((e1, e2))
 
                 if filtered_pairs:
-                    prompt=f"{relation_prompts[r]} Sentence: {sent} Do not return anything else."
+                    prompt=f"{relation_prompts[r]} Here is the sentence: {sent} If no such relation is found, return nothing."
                     model_name = "gemini-2.0-flash"
                     max_tokens = 100
                     temperature = 0.2
@@ -169,27 +185,41 @@ def main():
                         print(f"\n\tProcessed {i + 1} / {len(sentences)} sentences")
 
                     if ";" in response_text:
-                        lines = response_text.split('\n')
-                        for line in lines:
-                            if ";" in line:
-                                relation = line.split(";")
-                                subject = relation[0].strip()
-                                obj = relation[1].strip()                       
-                        print(f"\n=== Extracted Relation ===")
-                        print(response_text)
-                        print(f"\nSentence: {sent} ")
-                        print(f"Subject: {subject} Object: {obj}")
-                        if ((subject,obj) in X):
-                            print("Duplicate. Ignoring this.")
-                        else:
-                            print(f"\nAdding to set of extracted relations")
-                            X.add((subject, obj, 1.0))
-                            extracted +=1
-                        print(f"\t\t==========")
+                        extracted = response_text.split(";")
+                        if len(extracted) ==2:
+                            subject = extracted[0].strip()
+                            obj = extracted[1].strip()    
+
+                            if 'unknown' in obj.lower() or 'student' in obj.lower():
+                                continue
+
+                            print(f"\n=== Extracted Relation ===")
+                            print(response_text)
+                            print(f"\nSentence: {sent} ")
+                            print(f"Subject: {subject} | Object: {obj}")
+                            if ((subject,obj,1.0)) in X:
+                                print("Duplicate. Ignoring this.")
+                            else:
+                                print(f"\nAdding to set of extracted relations")
+                                X.add((subject, obj, 1.0))
+                                extracted_count +=1
+                            annotated +=1
+                            print(f"==========")
+                            
                         
-            print(f"Extracted annotations for {extracted} out of a total {len(sentences)} for this website.")
-            print(f"Relations extracted from this website:{extracted}")
+            print(f"Extracted annotations for {annotated} out of a total {len(sentences)} for this website.")
+            total_extracted += extracted_count
+            print(f"Relations extracted from this website: {extracted_count}. Total: {total_extracted}")
+            if len(X) >= k:
+                    print(f"{k} relations extracted, terminating and printing relations")
+                    break
+            
             index+=1
+    print(f'\n============ALL EXTRACTED RELATIONS ({total_extracted})============')
+    results = list(X)
+    top_k = results[:k]
+    for tup in top_k:
+        print(f'Subject: {tup[0]}\tObject: {tup[1]}')
         
 
 
