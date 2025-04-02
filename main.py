@@ -19,7 +19,6 @@ import time
     #  8) Integer k > 0
 
 def google_search(API_KEY,CX, query):
-    print(f"=========== Iteration: 0 - Query: {query} ===========")
 
     service = build("customsearch", "v1", developerKey=API_KEY)
     res = service.cse().list(q=query, cx=CX, num=10).execute()
@@ -130,98 +129,114 @@ def main():
 
     target_types = relation_pairs[r]
 
-    X = set() #initialize set
+    #initialize sets
+    X = set() 
     processed = set()
+    queried = set()
+    current_q =seed_query
 
-    urls = google_search(API_KEY, CX, seed_query) #query google search engine 
-    if not urls:
-        print("No search results found.")
-        return
 
-    index = 1 
+    it = 0
     total_extracted=0
-    for url in urls:
-        if url not in processed:
-            print(f"\nURL ({index} / {len(urls)}): {url}")
-            print("\tFetching text from url ...")
+    while len(X) < k:
+        print(f"=========== Iteration: {it} - Query: {current_q} ===========")
+        urls = google_search(API_KEY, CX, current_q) #query google search engine 
+        if not urls:
+            print("No search results found.")
+            return
 
-            raw_text = fetch_page_text(url)
+        index = 1 
+        for url in urls:
+            if url not in processed:
+                print(f"\nURL ({index} / {len(urls)}): {url}")
+                print("\tFetching text from url ...")
 
-            print(f"\tWebpage length (num characters): {len(raw_text)}")
+                raw_text = fetch_page_text(url)
 
-            print("\tAnnotating the webpage using spaCy...")
-            doc = nlp(raw_text) #use spacy
-            sentences = list(doc.sents)
-            print(f"\tExtracted {len(sentences)} sentences. Processing each one for correct entity pairings...")
-            
-            extracted_count = 0 
-            annotated=0
-            for i, sent in enumerate(sentences):
-                pairs = create_entity_pairs(sent, target_types)
-                if not pairs:
-                    continue
-                filtered_pairs = []
-                for tokens, e1, e2 in pairs:
-                    e1_type = e1[1]
-                    e2_type = e2[1]
-                    subj_type, obj_type = target_types
+                print(f"\tWebpage length (num characters): {len(raw_text)}")
 
-                    if ((e1_type == subj_type and e2_type == obj_type) or (e1_type == obj_type and e2_type == subj_type)):
-                        filtered_pairs.append((e1, e2))
-
-                if filtered_pairs:
-                    prompt=f"{relation_prompts[r]} Here is the sentence: {sent} If no such relation is found, return nothing."
-                    model_name = "gemini-2.0-flash"
-                    max_tokens = 100
-                    temperature = 0.2
-                    top_p = 1
-                    top_k = 32
-                    try:
-                        response_text = get_gemini(prompt, model_name, max_tokens, temperature, top_p, top_k)
-                    except Exception as e:
-                        print(f"\t[!] Gemini API error: {e}")
+                print("\tAnnotating the webpage using spaCy...")
+                doc = nlp(raw_text) #use spacy
+                sentences = list(doc.sents)
+                print(f"\tExtracted {len(sentences)} sentences. Processing each one for correct entity pairings...")
+                
+                extracted_count = 0 
+                annotated=0
+                for i, sent in enumerate(sentences):
+                    pairs = create_entity_pairs(sent, target_types)
+                    if not pairs:
                         continue
-                    if (i + 1) % 5 == 0 or i == len(sentences) - 1:
-                        print(f"\n\tProcessed {i + 1} / {len(sentences)} sentences")
+                    filtered_pairs = []
+                    for tokens, e1, e2 in pairs:
+                        e1_type = e1[1]
+                        e2_type = e2[1]
+                        subj_type, obj_type = target_types
+                        if ((e1_type == subj_type and e2_type == obj_type) or (e1_type == obj_type and e2_type == subj_type)):
+                            filtered_pairs.append((e1, e2))
 
-                    if ";" in response_text:
-                        extracted = response_text.split(";")
-                        if len(extracted) ==2:
-                            subject = extracted[0].strip()
-                            obj = extracted[1].strip()    
+                    if filtered_pairs:
+                        prompt=f"{relation_prompts[r]} Here is the sentence: {sent} If no such relation is found, return nothing."
+                        model_name = "gemini-2.0-flash"
+                        max_tokens = 100
+                        temperature = 0.2
+                        top_p = 1
+                        top_k = 32
+                        try:
+                            response_text = get_gemini(prompt, model_name, max_tokens, temperature, top_p, top_k)
+                        except Exception as e:
+                            print(f"\t[!] Gemini API error: {e}")
+                            continue
+                        if (i + 1) % 5 == 0 or i == len(sentences) - 1:
+                            print(f"\n\tProcessed {i + 1} / {len(sentences)} sentences")
 
-                            if 'unknown' in obj.lower() or 'student' in obj.lower():
-                                continue
+                        if ";" in response_text:
+                            extracted = response_text.split(";")
+                            if len(extracted) ==2:
+                                subject = extracted[0].strip()
+                                obj = extracted[1].strip()    
 
-                            print(f"\n=== Extracted Relation ===")
-                            print(response_text)
-                            print(f"\nSentence: {sent} ")
-                            print(f"Subject: {subject} | Object: {obj}")
-                            if ((subject,obj,1.0)) in X:
-                                print("Duplicate. Ignoring this.")
-                            else:
-                                print(f"\nAdding to set of extracted relations")
-                                X.add((subject, obj, 1.0))
-                                extracted_count +=1
-                            annotated +=1
-                            print(f"==========")
+                                if 'unknown' in obj.lower() or 'student' in obj.lower():
+                                    continue
+
+                                print(f"\n=== Extracted Relation ===")
+                                print(response_text)
+                                print(f"\nSentence: {sent} ")
+                                print(f"Subject: {subject} | Object: {obj}")
+                                if ((subject,obj,1.0)) in X:
+                                    print("Duplicate. Ignoring this.")
+                                else:
+                                    print(f"\nAdding to set of extracted relations")
+                                    X.add((subject, obj, 1.0))
+                                    extracted_count +=1
+                                annotated +=1
+                                print(f"==========")
+                                
                             
-                        
-            print(f"Extracted annotations for {annotated} out of a total {len(sentences)} for this website.")
-            total_extracted += extracted_count
-            print(f"Relations extracted from this website: {extracted_count}. Total: {total_extracted}")
-            if len(X) >= k:
-                    print(f"{k} relations extracted, terminating and printing relations")
-                    break
+                print(f"Extracted annotations for {annotated} out of a total {len(sentences)} for this website.")
+                total_extracted += extracted_count
+                print(f"Relations extracted from this website: {extracted_count}. Total: {total_extracted}")
+                
+                index+=1
+                
+            processed.add(url)
+        if len(X) < k:
+            candidates = [tup for tup in X if tup not in queried]
+            if not candidates:
+                print("ISE has stalled.")
+                break
+            y = candidates[0]
+            queried.add(y)
+            current_q = f"{y[0]} {y[1]}"
+            it+=1
             
-            index+=1
+    
     print(f'\n============ALL EXTRACTED RELATIONS ({total_extracted})============')
     results = list(X)
     top_k = results[:k]
     for tup in top_k:
         print(f'Subject: {tup[0]}\tObject: {tup[1]}')
-        
-
+    print(f"Total number of iterations:{it}")
+       
 
 if __name__ == "__main__":
     main()
