@@ -1,4 +1,8 @@
-(dbproj_local) (base) MBP-1278:advancedDB-project2 kiraariyan$ python integratedCode.py gemini 2 0.0 "bill gates microsoft" 10
+
+Transcript for gemini 2 0.0 "bill gates microsoft" 10
+
+(dbproj_local) (base) MacBook-Pro-1278:advancedDB-project2 kiraariyan$ python integratedCode.py gemini 2 0.0 "bill gates microsoft" 10
+
 Parameters:
 Client key     = AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY
 Engine key     = d29acf7ff2d2f40a9
@@ -14,10 +18,18 @@ Query          = bill gates microsoft
 
 URL (1/10): https://en.wikipedia.org/wiki/Bill_Gates
         Fetching text from url...
-        Trimming webpage content from 121543 to 10000 characters
+        Trimming webpage content from 121560 to 10000 characters
         Webpage length (num characters): 10000
         Annotating the webpage using spaCy...
         Extracted 75 sentences. Processing each one for correct entity pairings...
+
+=== Extracted Relation ===
+
+Sentence: Bill Gates - Wikipedia Jump to content From Wikipedia, the free encyclopedia American businessman and philanthropist (born 1955) 
+Subject: Bill Gates | Object: Wikipedia
+
+Adding to set of extracted relations
+==========
 
         Processed 5 / 75 sentences
 
@@ -124,14 +136,6 @@ Adding to set of extracted relations
 === Extracted Relation ===
 
 Sentence: [ 28 ] Gates remained in contact with Paul Allen and joined him at Honeywell during the summer of 1974. 
-Subject: Gates | Object: Honeywell
-
-Adding to set of extracted relations
-==========
-
-=== Extracted Relation ===
-
-Sentence: [ 28 ] Gates remained in contact with Paul Allen and joined him at Honeywell during the summer of 1974. 
 Subject: Paul Allen | Object: Honeywell
 
 Adding to set of extracted relations
@@ -208,22 +212,21 @@ Subject: Ric Weiland | Object: Microsoft
 
 Adding to set of extracted relations
 ==========
-Extracted annotations for 19 out of a total 75 sentences for this website.
+Extracted annotations for 13 out of a total 75 sentences for this website.
 Relations extracted from this website: 20. Total: 20
 
 URL (2/10): https://www.instagram.com/thisisbillgates/?hl=en
         Fetching text from url...
-        Webpage length (num characters): 0
+        Webpage length (num characters): 59
         Annotating the webpage using spaCy...
-Extrated annotations for 0 sentences.
-Relations Extracted from this website: 0
+        Extracted 1 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 1 sentences for this website.
+Relations extracted from this website: 0. Total: 20
 
 URL (3/10): https://www.linkedin.com/in/williamhgates
         Fetching text from url...
         Webpage length (num characters): 0
         Annotating the webpage using spaCy...
-Extrated annotations for 0 sentences.
-Relations Extracted from this website: 0
 
 URL (4/10): https://x.com/billgates
         Fetching text from url...
@@ -232,12 +235,12 @@ URL (4/10): https://x.com/billgates
         Extracted 4 sentences. Processing each one for correct entity pairings...
 
         Processed 4 / 4 sentences
-Extracted annotations for 1 out of a total 4 sentences for this website.
+Extracted annotations for 0 out of a total 4 sentences for this website.
 Relations extracted from this website: 0. Total: 20
 
 URL (5/10): https://www.gatesnotes.com/
         Fetching text from url...
-        Webpage length (num characters): 198
+        Webpage length (num characters): 210
         Annotating the webpage using spaCy...
         Extracted 2 sentences. Processing each one for correct entity pairings...
 Extracted annotations for 0 out of a total 2 sentences for this website.
@@ -245,74 +248,69 @@ Relations extracted from this website: 0. Total: 20
 
 URL (6/10): https://news.microsoft.com/2020/03/13/microsoft-announces-change-to-its-board-of-directors/
         Fetching text from url...
-        Webpage length (num characters): 19
+        Webpage length (num characters): 33
         Annotating the webpage using spaCy...
         Extracted 1 sentences. Processing each one for correct entity pairings...
 Extracted annotations for 0 out of a total 1 sentences for this website.
 Relations extracted from this website: 0. Total: 20
 
-URL (7/10): https://www.youtube.com/billgates
+URL (7/10): https://www.gatesnotes.com/microsoft-original-source-code
         Fetching text from url...
-        Webpage length (num characters): 164
+        Webpage length (num characters): 240
         Annotating the webpage using spaCy...
         Extracted 2 sentences. Processing each one for correct entity pairings...
 Extracted annotations for 0 out of a total 2 sentences for this website.
 Relations extracted from this website: 0. Total: 20
 
-URL (8/10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-for-july-2008-transition-for-bill-gates/
+URL (8/10): https://www.youtube.com/billgates
         Fetching text from url...
-        Webpage length (num characters): 19
+        Webpage length (num characters): 185
+        Annotating the webpage using spaCy...
+        Extracted 1 sentences. Processing each one for correct entity pairings...
+
+        Processed 1 / 1 sentences
+
+=== Extracted Relation ===
+
+Sentence: Bill Gates - YouTube About Press Copyright Contact us Creators Advertise Developers Terms Privacy Policy & Safety How YouTube works Test new features NFL Sunday Ticket  2025 Google LLC 
+Subject: Bill Gates | Object: Google LLC
+
+Adding to set of extracted relations
+==========
+Extracted annotations for 1 out of a total 1 sentences for this website.
+Relations extracted from this website: 1. Total: 21
+
+URL (9/10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-for-july-2008-transition-for-bill-gates/
+        Fetching text from url...
+        Webpage length (num characters): 33
         Annotating the webpage using spaCy...
         Extracted 1 sentences. Processing each one for correct entity pairings...
 Extracted annotations for 0 out of a total 1 sentences for this website.
-Relations extracted from this website: 0. Total: 20
+Relations extracted from this website: 0. Total: 21
 
-URL (9/10): https://www.microsoft.com/
+URL (10/10): https://www.microsoft.com/
         Fetching text from url...
-        Webpage length (num characters): 430
+        Webpage length (num characters): 524
         Annotating the webpage using spaCy...
-        Extracted 1 sentences. Processing each one for correct entity pairings...
-Extracted annotations for 0 out of a total 1 sentences for this website.
-Relations extracted from this website: 0. Total: 20
+        Extracted 3 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 3 sentences for this website.
+Relations extracted from this website: 0. Total: 21
 
-URL (10/10): https://answers.microsoft.com/en-us/windows/forum/all/a-short-letter-to-bill-gates/59fdd4d0-6330-40da-9e66-fa6c29836454
-        Fetching text from url...
-        Webpage length (num characters): 0
-        Annotating the webpage using spaCy...
-Extrated annotations for 0 sentences.
-Relations Extracted from this website: 0
+============ FINAL EXTRACTED RELATIONS (Top-10 out of total 21) ============
 
-============ FINAL EXTRACTED RELATIONS (20) ============
-
-Subject: Gates  Object: Cascade Investment
-Subject: Ric Weiland    Object: Computer Center Corporation
-Subject: Paul Allen     Object: Honeywell
-Subject: Gates  Object: TerraPower
-Subject: Gates  Object: Gates Ventures
-Subject: Paul Allen     Object: Microsoft
-Subject: Kent Evans     Object: Computer Center Corporation
-Subject: Gates  Object: Honeywell
-Subject: Gates  Object: Intel
 Subject: Allen  Object: MITS
+Subject: Allen  Object: Intel
+Subject: Gates  Object: Gates Ventures
+Subject: Paul Allen     Object: Computer Center Corporation
+Subject: Steve Ballmer  Object: Microsoft
+Subject: Ric Weiland    Object: Microsoft
+Subject: Ric Weiland    Object: Computer Center Corporation
+Subject: Gates  Object: Micro Instrumentation and Telemetry Systems
+Subject: Paul Allen     Object: Honeywell
+Subject: He     Object: Microsoft
 
 Total ISE iterations: 1
-(dbproj_local) (base) MBP-1278:advancedDB-project2 kiraariyan$ 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+(dbproj_local) (base) MacBook-Pro-1278:advancedDB-project2 kiraariyan$ 
 
 
 
@@ -344,6 +342,7 @@ URL (1/10): https://en.wikipedia.org/wiki/Bill_Gates
 	Annotating the webpage using spaCy...
 	Extracted 77 sentences. Processing...
 	✔ SpanBERT: Harvard College → Microsoft (conf=0.53)
+	
 
 URL (2/10): https://www.linkedin.com/in/williamhgates
 	Fetching text from url...

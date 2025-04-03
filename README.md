@@ -48,17 +48,21 @@ used transformers, torch, spacy, googleapiclient, google.generativeai, bs4, requ
 
 e.
 
-1. Perform Google search using the current query  
-2. Scrape and clean page text  
-3. Split into sentences w spaCy  
-4. Extract valid (subject, object) entity pairs  
-5. Use:
+1. Take in command line arguments and validate each one, ensuring it is a proper option (spanbert/gemini) or a valid number within range
+2. Perform Google search using the current query and google api key.
+3. Scrape and clean page text using beautiful soup. Only extract relevant text we tried to eliminate as much of the extraneous text as possible, to not waste space within the 10000 characters on header or navigation text.
+4. Split into sentences w spaCy.
+5. Loop through each sentence, and examine entity pairings from each sentence. Check for  valid (subject, object) entity pairs.
+Used create_entity_pairs from spacy_help.py to extract all entity pairings. 
+If valid entity pairs were found in that sentence (based on which relation we are looking for) :
+6. Use:
    - SpanBERT - predict relations and filter by confidence  
-   - Gemini - prompt based relation extraction  
-6. Add valid pairs to result set
-7. After one iteration is complete, if k tuples not met use new pair to construct next query  
-8. Repeat until k tuples extracted or no progress is made
-9. Print top k tuples as result
+   - Gemini - prompt based relation extraction. If proper relations are found, prompt sentence and prompt into gemini to look for relations. Prompted gemini to return relations in a specific format, so that they could be easily extracted in the next step 
+   if such a relation was found.
+7. If relation is extracted, (and not already in set) add to set X and display proper information.
+8. After one iteration is complete, if k tuples not met use new pair to construct next query  
+9. Repeat until k tuples extracted or no further tuples exist to use as a query, in this case ISE has stalled..
+10. Print top k tuples as result.
 
 f.
   API_KEY = 'AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY'
@@ -66,5 +70,5 @@ f.
 g.
 
 - Both spanbert and gemini methods supported from CLI  
-- We hardcoded API keys used in script, as to reduce the amount of command line arguments needed.
+- We hardcoded API keys used in script, as to reduce the amount of command line arguments needed (as encouraged on Ed discussion).
 - Model inference and prompt timing include 5s delay to prevent rate limits 429 errors  
