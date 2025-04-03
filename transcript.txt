@@ -1,7 +1,7 @@
 
 Transcript for gemini 2 0.0 "bill gates microsoft" 10
 
-(dbproj_local) (base) MacBook-Pro-1278:advancedDB-project2 kiraariyan$ python project3.py gemini 2 0.0 "bill gates microsoft" 10
+(dbproj_local) (base) MacBook-Pro-1278:advancedDB-project2 kiraariyan$ python project2.py gemini 2 0.0 "bill gates microsoft" 10
 
 Parameters:
 Client key     = AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY

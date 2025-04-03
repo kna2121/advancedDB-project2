@@ -3,7 +3,7 @@ a.
 - Ralph Betesh - rb3557  
 
 b. Submitted Files
-- project3.py 
+- project2.py 
 - spacy_help.py  
 - spanbert.py  
 - example_relations.py  
