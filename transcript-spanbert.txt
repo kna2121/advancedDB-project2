@@ -1,219 +1,265 @@
-spanbert 2 0.7 "bill gates microsoft" 10
-
 Parameters:
 Client key     = AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY
 Engine key     = d29acf7ff2d2f40a9
-Gemini key     = AIzaSyBzTTV9qedmDGr-IjLhNYT9pzOAHpHOOIc
+Gemini key     = AIzaSyBH4UBuhu9hLgk4mDUkQfbeZkxkPz4toNk
 Method         = spanbert
-Relation       = Work_For
-Threshold      = 0.7
-Query          = bill gates microsoft
-# of Tuples    = 10
+Relation       = Schools_Attended
+Threshold      = 0.75
+Query          = barack obama harvard
+# of Tuples    = 5
 
-Loading spaCy model...
-Loading SpanBERT model...
 
-=========== Iteration: 0 - Query: bill gates microsoft ===========
+=========== Iteration: 0 - Query: barack obama harvard ===========
 
-URL (1/10): https://en.wikipedia.org/wiki/Bill_Gates
+URL (1/10): https://en.wikipedia.org/wiki/Barack_Obama
         Fetching text from url...
-        Trimming webpage content from 121163 to 10000 characters
+        Trimming webpage content from 215889 to 10000 characters
         Webpage length (num characters): 10000
         Annotating the webpage using spaCy...
-        Extracted 77 sentences. Processing each one for correct entity pairings...
+        Extracted 71 sentences. Processing each one for correct entity pairings...
 
 === Extracted Relation ===
-
-Sentence: Gates dropped out of Harvard College to start Microsoft.
-Subject: Harvard College | Object: Microsoft
-
+\Tokens: ['In', '1988', ',', 'Obama', 'enrolled', 'in', 'Harvard', 'Law', 'School', ',', 'where', 'he', 'was', 'the', 'first', 'black', 'president', 'of', 'the', 'Harvard', 'Law', 'Review', '.'] 
+         Subject: Obama | Object:Harvard Law School (conf=0.9826144576072693)
 Adding to set of extracted relations
 ==========
-
-URL (2/10): https://www.linkedin.com/in/williamhgates
-        Fetching text from url...
-        Webpage length (num characters): 0
-        Annotating the webpage using spaCy...
-
-URL (3/10): https://www.instagram.com/thisisbillgates/?hl=en
-        Fetching text from url...
-        Webpage length (num characters): 0
-        Annotating the webpage using spaCy...
-
-URL (4/10): https://x.com/billgates
-        Fetching text from url...
-        Webpage length (num characters): 249
-        Annotating the webpage using spaCy...
-        Extracted 4 sentences. Processing...
-
-        Processed 4 / 4 sentences
-Extracted annotations for 0 out of a total 4 sentences for this website.
-Relations extracted from this website: 0. Total: 1
-
-URL (5/10): https://news.microsoft.com/2020/03/13/microsoft-announces-change-to-its-board-of-directors/
-        Fetching text from url...
-        Webpage length (num characters): 19
-        Annotating the webpage using spaCy...
-        Extracted 1 sentences. Processing...
-
-Extracted annotations for 0 out of a total 1 sentences for this website.
-Relations extracted from this website: 0. Total: 1
-
-URL (6/10): https://www.gatesnotes.com/
-        Fetching text from url...
-        Webpage length (num characters): 198
-        Annotating the webpage using spaCy...
-        Extracted 2 sentences. Processing...
-
-Extracted annotations for 0 out of a total 2 sentences for this website.
-Relations extracted from this website: 0. Total: 1
-
-URL (7/10): https://www.youtube.com/user/thegatesnotes
-        Fetching text from url...
-        Webpage length (num characters): 164
-        Annotating the webpage using spaCy...
-        Extracted 2 sentences. Processing...
-
-Extracted annotations for 0 out of a total 2 sentences for this website.
-Relations extracted from this website: 0. Total: 1
-
-URL (8/10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-for-july-2008-transition-for-bill-gates/
-        Fetching text from url...
-        Webpage length (num characters): 19
-        Annotating the webpage using spaCy...
-        Extracted 1 sentences. Processing...
-
-Extracted annotations for 0 out of a total 1 sentences for this website.
-Relations extracted from this website: 0. Total: 1
-
-URL (9/10): https://www.microsoft.com/
-        Fetching text from url...
-        Webpage length (num characters): 430
-        Annotating the webpage using spaCy...
-        Extracted 1 sentences. Processing...
-
-Extracted annotations for 0 out of a total 1 sentences for this website.
-Relations extracted from this website: 0. Total: 1
-
-URL (10/10): https://answers.microsoft.com/en-us/windows/forum/all/a-short-letter-to-bill-gates/59fdd4d0-6330-40da-9e66-fa6c29836454
-        Fetching text from url...
-        Webpage length (num characters): 0
-        Annotating the webpage using spaCy...
-
-=========== Iteration: 1 - Query: Harvard College Microsoft ===========
-
-URL (1/10): https://www.huit.harvard.edu/microsoft-365
-        Fetching text from url...
-        Webpage length (num characters): 2524
-        Annotating the webpage using spaCy...
-        Extracted 11 sentences. Processing...
-
-URL (2/10): https://it.hms.harvard.edu/teams
-        Fetching text from url...
-        Webpage length (num characters): 1269
-        Annotating the webpage using spaCy...
-        Extracted 6 sentences. Processing...
-
-URL (3/10): https://www.huit.harvard.edu/office-365
-        Fetching text from url...
-        Webpage length (num characters): 3187
-        Annotating the webpage using spaCy...
-        Extracted 17 sentences. Processing...
-
-URL (4/10): https://hsph.harvard.edu/office/student-affairs/
-        Fetching text from url...
-        Webpage length (num characters): 2364
-        Annotating the webpage using spaCy...
-        Extracted 17 sentences. Processing...
-
-URL (5/10): https://www.huit.harvard.edu/outlook
-        Fetching text from url...
-        Webpage length (num characters): 3297
-        Annotating the webpage using spaCy...
-        Extracted 17 sentences. Processing...
-
-URL (6/10): https://careerservices.fas.harvard.edu/resources/bullet-point-resume-template/
-        Fetching text from url...
-        Webpage length (num characters): 5984
-        Annotating the webpage using spaCy...
-        Extracted 23 sentences. Processing...
-
-URL (7/10): https://college.harvard.edu/student-life/student-stories/my-unofficial-tips-interviews
-        Fetching text from url...
-        Trimming webpage content from 18949 to 10000 characters
-        Webpage length (num characters): 10000
-        Annotating the webpage using spaCy...
-        Extracted 108 sentences. Processing...
-
-URL (8/10): https://imaginecup.microsoft.com/pt-pt/Team/Index/fffa40b5-4724-498e-a04b-5aadb50108ba
-        Fetching text from url...
-        Webpage length (num characters): 5903
-        Annotating the webpage using spaCy...
-        Extracted 37 sentences. Processing...
 
 === Extracted Relation ===
-
-Sentence: Harvard collaborates with the Shorenstein Center on Microsoft education tools.
-Subject: Harvard | Object: the Shorenstein Center
-
+\Tokens: ['In', '1988', ',', 'Obama', 'enrolled', 'in', 'Harvard', 'Law', 'School', ',', 'where', 'he', 'was', 'the', 'first', 'black', 'president', 'of', 'the', 'Harvard', 'Law', 'Review', '.'] 
+         Subject: Obama | Object:the Harvard Law Review (conf=0.9603234529495239)
 Adding to set of extracted relations
 ==========
 
-URL (9/10): https://college.harvard.edu/student-life/student-stories/my-top-tips-applying-harvard
+=== Extracted Relation ===
+\Tokens: ['In', '1988', ',', 'Obama', 'enrolled', 'in', 'Harvard', 'Law', 'School', ',', 'where', 'he', 'was', 'the', 'first', 'black', 'president', 'of', 'the', 'Harvard', 'Law', 'Review', '.'] 
+         Subject: Harvard Law School | Object:the Harvard Law Review (conf=0.9011394381523132)
+Adding to set of extracted relations
+==========
+
+        Processed 15 / 71 sentences
+
+        Processed 20 / 71 sentences
+
+        Processed 25 / 71 sentences
+
+        Processed 40 / 71 sentences
+
+        Processed 60 / 71 sentences
+
+        Processed 71 / 71 sentences
+
+URL (2/10): https://hls.harvard.edu/today/obama-first-made-history-at-hls/
         Fetching text from url...
-        Trimming webpage content from 19853 to 10000 characters
+        Webpage length (num characters): 5052
+        Annotating the webpage using spaCy...
+        Extracted 36 sentences. Processing each one for correct entity pairings...
+
+=== Extracted Relation ===
+\Tokens: ['It', 'was', 'as', 'a', 'law', 'student', 'that', 'Obama', 'first', 'made', 'history', '—', 'and', 'national', 'headlines', '—', 'when', 'he', 'was', 'elected', 'the', 'first', 'black', 'president', 'of', 'the', 'Harvard', 'Law', 'Review', 'in', 'the', 'spring', 'of', '1990', '.'] 
+         Subject: Obama | Object:the Harvard Law Review (conf=0.9408870935440063)
+Adding to set of extracted relations
+==========
+
+        Processed 15 / 36 sentences
+
+        Processed 20 / 36 sentences
+
+=== Extracted Relation ===
+\Tokens: ['Artur', 'Davis', '‘', '93', 'still', 'vividly', 'recalls', 'how', 'much', 'Obama', 'inspired', 'him', 'with', 'a', 'speech', 'he', 'gave', 'during', 'orientation', 'week', 'on', 'striving', 'for', 'excellence', 'and', 'mastery', '.'] 
+         Subject: Artur Davis | Object:Obama (conf=0.9572403430938721)
+Adding to set of extracted relations
+==========
+
+        Processed 30 / 36 sentences
+
+        Processed 35 / 36 sentences
+
+        Processed 36 / 36 sentences
+
+URL (3/10): https://www.obamalibrary.gov/obamas/president-barack-obama
+        Fetching text from url...
+        Webpage length (num characters): 7710
+        Annotating the webpage using spaCy...
+        Extracted 54 sentences. Processing each one for correct entity pairings...
+
+        Processed 5 / 54 sentences
+
+=== Extracted Relation ===
+\Tokens: ['Obama', 'first', 'attended', 'Occidental', 'College', 'in', 'Los', 'Angeles', ',', 'before', 'transferring', 'to', 'Columbia', 'University', ',', 'where', 'he', 'earned', 'a', 'Bachelor', 'of', 'Arts', 'degree', 'in', 'political', 'science', 'in', '1983', '.'] 
+         Subject: Obama | Object:Occidental College (conf=0.9298142194747925)
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+\Tokens: ['Obama', 'first', 'attended', 'Occidental', 'College', 'in', 'Los', 'Angeles', ',', 'before', 'transferring', 'to', 'Columbia', 'University', ',', 'where', 'he', 'earned', 'a', 'Bachelor', 'of', 'Arts', 'degree', 'in', 'political', 'science', 'in', '1983', '.'] 
+         Subject: Obama | Object:Columbia University (conf=0.9453431963920593)
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+\Tokens: ['Obama', 'first', 'attended', 'Occidental', 'College', 'in', 'Los', 'Angeles', ',', 'before', 'transferring', 'to', 'Columbia', 'University', ',', 'where', 'he', 'earned', 'a', 'Bachelor', 'of', 'Arts', 'degree', 'in', 'political', 'science', 'in', '1983', '.'] 
+         Subject: Occidental College | Object:Columbia University (conf=0.8323698043823242)
+Adding to set of extracted relations
+==========
+
+        Processed 10 / 54 sentences
+
+=== Extracted Relation ===
+\Tokens: ['After', 'three', 'years', 'of', 'community', 'organizing', ',', 'Obama', 'enrolled', 'in', 'Harvard', 'Law', 'School', '.'] 
+         Subject: Obama | Object:Harvard Law School (conf=0.9861361980438232)
+Adding to set of extracted relations
+==========
+
+        Processed 15 / 54 sentences
+
+        Processed 40 / 54 sentences
+
+        Processed 45 / 54 sentences
+
+        Processed 50 / 54 sentences
+
+        Processed 54 / 54 sentences
+
+URL (4/10): https://millercenter.org/president/obama/life-before-the-presidency
+        Fetching text from url...
+        Trimming webpage content from 11640 to 10000 characters
         Webpage length (num characters): 10000
         Annotating the webpage using spaCy...
-        Extracted 84 sentences. Processing...
+        Extracted 57 sentences. Processing each one for correct entity pairings...
 
-URL (10/10): https://dso.college.harvard.edu/people/people-type/residential
-        Fetching text from url...
-        Webpage length (num characters): 2981
-        Annotating the webpage using spaCy...
-        Extracted 12 sentences. Processing...
-
-=========== Iteration: 2 - Query: Harvard the Shorenstein Center ===========
-
-URL (1/10): https://shorensteincenter.org/
-        Fetching text from url...
-        Webpage length (num characters): 4291
-        Annotating the webpage using spaCy...
-        Extracted 26 sentences. Processing...
-
+=== Extracted Relation ===
+\Tokens: ['Obama', "'s", 'father', 'left', 'the', 'family', 'when', 'Obama', 'was', 'two', 'and', ',', 'after', 'further', 'studies', 'at', 'Harvard', 'University', ',', 'returned', 'to', 'Kenya', ',', 'where', 'he', 'died', 'in', 'an', 'automobile', 'accident', 'nineteen', 'years', 'later', '.'] 
+         Subject: Obama | Object:Harvard University (conf=0.9702216386795044)
 Adding to set of extracted relations
 ==========
 
-URL (2/10): https://en.wikipedia.org/wiki/Shorenstein_Center_on_Media,_Politics_and_Public_Policy
+=== Extracted Relation ===
+\Tokens: ['Obama', "'s", 'father', 'left', 'the', 'family', 'when', 'Obama', 'was', 'two', 'and', ',', 'after', 'further', 'studies', 'at', 'Harvard', 'University', ',', 'returned', 'to', 'Kenya', ',', 'where', 'he', 'died', 'in', 'an', 'automobile', 'accident', 'nineteen', 'years', 'later', '.'] 
+         Subject: Obama | Object:Harvard University (conf=0.9702216386795044)
+Adding to set of extracted relations
+==========
+
+        Processed 5 / 57 sentences
+
+        Processed 10 / 57 sentences
+
+        Processed 20 / 57 sentences
+
+=== Extracted Relation ===
+\Tokens: ['In', '1988', ',', 'Obama', 'enrolled', 'at', 'Harvard', 'Law', 'School', ',', 'where', 'he', 'excelled', 'as', 'a', 'student', ',', 'graduating', 'magna', 'cum', 'laude', 'and', 'winning', 'election', 'as', 'president', 'of', 'the', 'prestigious', 'Harvard', 'Law', 'Review', 'for', 'the', 'academic', 'year', '1990', '-', '1991', '.'] 
+         Subject: Obama | Object:Harvard Law School (conf=0.9758573174476624)
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+\Tokens: ['In', '1988', ',', 'Obama', 'enrolled', 'at', 'Harvard', 'Law', 'School', ',', 'where', 'he', 'excelled', 'as', 'a', 'student', ',', 'graduating', 'magna', 'cum', 'laude', 'and', 'winning', 'election', 'as', 'president', 'of', 'the', 'prestigious', 'Harvard', 'Law', 'Review', 'for', 'the', 'academic', 'year', '1990', '-', '1991', '.'] 
+         Subject: Obama | Object:Harvard Law Review (conf=0.943925678730011)
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+\Tokens: ['In', '1988', ',', 'Obama', 'enrolled', 'at', 'Harvard', 'Law', 'School', ',', 'where', 'he', 'excelled', 'as', 'a', 'student', ',', 'graduating', 'magna', 'cum', 'laude', 'and', 'winning', 'election', 'as', 'president', 'of', 'the', 'prestigious', 'Harvard', 'Law', 'Review', 'for', 'the', 'academic', 'year', '1990', '-', '1991', '.'] 
+         Subject: Harvard Law School | Object:Harvard Law Review (conf=0.9238390326499939)
+Adding to set of extracted relations
+==========
+
+        Processed 30 / 57 sentences
+
+        Processed 35 / 57 sentences
+
+        Processed 40 / 57 sentences
+
+        Processed 45 / 57 sentences
+
+        Processed 50 / 57 sentences
+
+        Processed 55 / 57 sentences
+
+URL (5/10): https://news.harvard.edu/gazette/story/2008/11/obama-joins-list-of-seven-presidents-with-harvard-degrees/
         Fetching text from url...
-        Trimming webpage content from 12989 to 10000 characters
+        Trimming webpage content from 12255 to 10000 characters
         Webpage length (num characters): 10000
         Annotating the webpage using spaCy...
-        Extracted 138 sentences. Processing...
+        Extracted 75 sentences. Processing each one for correct entity pairings...
 
+        Processed 5 / 75 sentences
+
+        Processed 30 / 75 sentences
+
+=== Extracted Relation ===
+\Tokens: ['For', 'further', 'training', ',', 'though', ',', 'the', 'younger', 'Bush', 'came', 'to', 'Harvard', 'Business', 'School', ',', 'graduating', 'with', 'a', 'master', '’s', 'degree', 'in', 'business', 'administration', 'in', '1975', '.'] 
+         Subject: Bush | Object:Harvard Business School (conf=0.938757061958313)
 Adding to set of extracted relations
 ==========
 
-URL (3/10): https://shorensteincenter.org/programs/fellowships/
+        Processed 55 / 75 sentences
+
+=== Extracted Relation ===
+\Tokens: ['After', 'working', 'in', 'Chicago', 'as', 'a', 'community', 'organizer', ',', 'Obama', 'entered', 'Harvard', 'Law', 'School', '(', 'HLS', ')', 'in', '1988', '.'] 
+         Subject: Obama | Object:Harvard Law School (conf=0.965833306312561)
+Adding to set of extracted relations
+==========
+
+URL (6/10): https://www.npr.org/2012/05/22/153214284/obamas-harvard-days-began-with-exclamation-point
         Fetching text from url...
-        Webpage length (num characters): 3228
+        Webpage length (num characters): 9496
         Annotating the webpage using spaCy...
-        Extracted 20 sentences. Processing...
+        Extracted 80 sentences. Processing each one for correct entity pairings...
 
-...
+=== Extracted Relation ===
+\Tokens: ['In', 'this', 'installment', 'of', 'NPR', "'s", '"', 'Parallel', 'Lives', '"', 'series', ',', 'a', 'look', 'at', 'Obama', "'s", 'time', 'at', 'their', 'shared', 'alma', 'mater', '.'] 
+         Subject: NPR | Object:Obama (conf=0.9891680479049683)
+Adding to set of extracted relations
+==========
 
-10 tuples extracted, stopping iteration.
+        Processed 15 / 80 sentences
 
-============ FINAL EXTRACTED RELATIONS ============
+        Processed 20 / 80 sentences
 
-Subject: Harvard College    Object: Microsoft
-Subject: Harvard            Object: the Shorenstein Center
-Subject: PRIVACY            Object: ACCESSIBILITY
-Subject: ACCESSIBILITY      Object: ACCESSIBILITY
-Subject: The Shorenstein Center    Object: Harvard Kennedy School
-Subject: Laura              Object: the Technology and Public Purpose
-Subject: Laura              Object: TAPP
-Subject: the Technology and Public Purpose    Object: TAPP
-Subject: Laura              Object: the NYU Wagner School of Public Policy
-Subject: Laura              Object: Data for Social Innovation and Instructor
+        Processed 25 / 80 sentences
 
-Total ISE iterations: 3
+        Processed 35 / 80 sentences
+
+        Processed 40 / 80 sentences
+
+        Processed 50 / 80 sentences
+
+        Processed 55 / 80 sentences
+
+        Processed 60 / 80 sentences
+
+=== Extracted Relation ===
+\Tokens: ['Romney', "'s", 'Harvard', 'Days', 'Mitt', 'Romney', 'already', 'had', 'a', 'young', 'family', 'during', 'his', 'time', 'at', 'Harvard', '—', 'one', 'of', 'several', 'things', 'that', 'set', 'him', 'apart', 'from', 'most', 'students', '.'] 
+         Subject: Harvard Days Mitt Romney | Object:Harvard (conf=0.9589213132858276)
+Adding to set of extracted relations
+==========
+
+        Processed 70 / 80 sentences
+
+URL (7/10): https://news.harvard.edu/gazette/story/2010/05/dean-hammonds-appointed-to-hbcu-advisory-board-by-president-obama/
+        Fetching text from url...
+        Webpage length (num characters): 2752
+        Annotating the webpage using spaCy...
+        Extracted 13 sentences. Processing each one for correct entity pairings...
+
+        Processed 5 / 13 sentences
+
+URL (8/10): https://www.hks.harvard.edu/publications/barack-obama-americas-first-gay-president
+        Fetching text from url...
+        Webpage length (num characters): 1256
+        Annotating the webpage using spaCy...
+        Extracted 10 sentences. Processing each one for correct entity pairings...
+
+URL (9/10): https://harvardlawreview.org/print/vol-130/the-presidents-role-in-advancing-criminal-justice-reform/
+        Fetching text from url...
+        Webpage length (num characters): 33
+        Annotating the webpage using spaCy...
+        Extracted 1 sentences. Processing each one for correct entity pairings...
+
+URL (10/10): https://iop.harvard.edu/events/conversation-cody-keenan-director-speechwriting-president-barack-obama
+        Fetching text from url...
+        Webpage length (num characters): 9338
+        Annotating the webpage using spaCy...
+        Extracted 13 sentences. Processing each one for correct entity pairings...
+
+        Processed 5 / 13 sentences
