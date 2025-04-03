@@ -121,6 +121,7 @@ Query          = {seed_query}
     print("Loading necessary libraries...")
     nlp = spacy.load("en_core_web_sm")
 
+    #initialize spanbert model
     if method == 'spanbert':
         print("Loading SpanBERT model...")
         tokenizer = BertTokenizer.from_pretrained("./pretrained_spanbert")
@@ -144,6 +145,7 @@ Query          = {seed_query}
     iteration = 0
     total_extracted = 0
 
+    #continue until k tuples are found, check after each iteration of 10 urls
     while len(X) < k:
         print(f"\n=========== Iteration: {iteration} - Query: {current_query} ===========")
         urls = google_search(API_KEY, CX, current_query)
@@ -162,7 +164,7 @@ Query          = {seed_query}
             if not raw_text:
                 continue
 
-            doc = nlp(raw_text)
+            doc = nlp(raw_text) #use spacy
             sentences = list(doc.sents)
             print(f"\tExtracted {len(sentences)} sentences. Processing each one for correct entity pairings...")
 
@@ -170,11 +172,13 @@ Query          = {seed_query}
             annotated = 0
             for i, sent in enumerate(sentences):
                 try:
-                    pairs = create_entity_pairs(sent, target_types)
+                    pairs = create_entity_pairs(sent, target_types) #check for entity pairs
                     if not pairs:
                         continue
                     if (i+1) % 5 == 0 or i == len(sentences) - 1:
                         print(f"\n\tProcessed {i + 1} / {len(sentences)} sentences")
+
+                    #entity pairs must contain BOTH kinds of entities for the sentence to be prompted into gemini
                     if method == 'gemini':
                         filtered = []
                         for _, e1, e2 in pairs:
@@ -189,7 +193,7 @@ Query          = {seed_query}
                                 if ((e1_type == "PERSON" and e2_type in valid_locs) or
                                     (e2_type == "PERSON" and e1_type in valid_locs)):
                                     filtered.append((e1, e2))
-
+                        #if sentence contains required entity types, prompt sentence into gemini
                         if filtered:
                             prompt = f"{prompt_template} Here is the sentence: {sent}. If no such relation is found, return nothing."
                             try:
@@ -197,6 +201,7 @@ Query          = {seed_query}
                             except Exception as e:
                                 print(f"\tGemini API error: {e}. Continuing...")
                                 continue
+                            #get returned relation
                             if ";" in response:
                                 lines = response.strip().split("\n")
                                 for line in lines:
@@ -276,6 +281,7 @@ Query          = {seed_query}
             current_query = f"{y[0]} {y[1]}"
             iteration += 1
 
+    #prints out top-k extracted relations 
     print(f"\n============ FINAL EXTRACTED RELATIONS ({len(X)}) ============\n")
     for subj, obj, conf in list(X)[:k]: #prints top k extracted relations
         if method == 'spanbert':
