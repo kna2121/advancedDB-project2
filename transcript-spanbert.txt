@@ -263,3 +263,15 @@ URL (10/10): https://iop.harvard.edu/events/conversation-cody-keenan-director-sp
         Extracted 13 sentences. Processing each one for correct entity pairings...
 
         Processed 5 / 13 sentences
+
+        Processed 10 / 13 sentences
+
+============ FINAL EXTRACTED RELATIONS (Top-5 out of total 17) ============
+
+Subject: Obama  Object: Harvard Law School      Confidence: 0.98
+Subject: Obama  Object: Harvard Law School      Confidence: 0.98
+Subject: Obama  Object: the Harvard Law Review  Confidence: 0.96
+Subject: Obama  Object: Columbia University     Confidence: 0.95
+Subject: Harvard Law School     Object: the Harvard Law Review  Confidence: 0.90
+
+Total ISE iterations: 1
