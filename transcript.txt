@@ -1,7 +1,4 @@
-Transcript for: -gemini 2 0.0 "bill gates microsoft" 10
-
 (dbproj_local) (base) MBP-1278:advancedDB-project2 kiraariyan$ python integratedCode.py gemini 2 0.0 "bill gates microsoft" 10
-
 Parameters:
 Client key     = AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY
 Engine key     = d29acf7ff2d2f40a9
@@ -12,18 +9,17 @@ Threshold      = 0.0
 Query          = bill gates microsoft
 # of Tuples    = 10
 
-Loading spaCy model...
 
 =========== Iteration: 0 - Query: bill gates microsoft ===========
 
 URL (1/10): https://en.wikipedia.org/wiki/Bill_Gates
         Fetching text from url...
-        Trimming webpage content from 121163 to 10000 characters
+        Trimming webpage content from 121543 to 10000 characters
         Webpage length (num characters): 10000
         Annotating the webpage using spaCy...
-        Extracted 77 sentences. Processing each one for correct entity pairings...
+        Extracted 75 sentences. Processing each one for correct entity pairings...
 
-        Processed 5 / 77 sentences
+        Processed 5 / 75 sentences
 
 === Extracted Relation ===
 
@@ -33,12 +29,12 @@ Subject: Paul Allen | Object: Microsoft
 Adding to set of extracted relations
 ==========
 
-        Processed 10 / 77 sentences
+        Processed 10 / 75 sentences
 
 === Extracted Relation ===
 
-Sentence: He stepped down as chairman of the board in 2014 and became technology adviser to CEO Satya Nadella and other Microsoft leaders. 
-Subject: Satya Nadella | Object: Microsoft
+Sentence: He stepped down as chairman of the board in 2014 and became technology adviser to CEO Satya Nadella and other Microsoft leaders, a position he still holds. 
+Subject: He | Object: Microsoft
 
 Adding to set of extracted relations
 ==========
@@ -83,9 +79,9 @@ Subject: Gates | Object: Breakthrough Energy
 Adding to set of extracted relations
 ==========
 
-        Processed 35 / 77 sentences
+        Processed 35 / 75 sentences
 
-        Processed 40 / 77 sentences
+        Processed 40 / 75 sentences
 
 === Extracted Relation ===
 
@@ -111,23 +107,9 @@ Subject: Kent Evans | Object: Computer Center Corporation
 Adding to set of extracted relations
 ==========
 
-        Processed 45 / 77 sentences
+        Processed 50 / 75 sentences
 
-=== Extracted Relation ===
-
-Sentence: The following year, a Lakeside teacher enlisted Gates and Evans to automate the school's class-scheduling system, providing them computer time and royalties in return. 
-Subject: Gates | Object: Lakeside
-
-Adding to set of extracted relations
-==========
-
-=== Extracted Relation ===
-
-Sentence: The following year, a Lakeside teacher enlisted Gates and Evans to automate the school's class-scheduling system, providing them computer time and royalties in return. 
-Subject: Evans | Object: Lakeside
-
-Adding to set of extracted relations
-==========
+        Processed 55 / 75 sentences
 
 === Extracted Relation ===
 
@@ -137,9 +119,15 @@ Subject: Steve Ballmer | Object: Microsoft
 Adding to set of extracted relations
 ==========
 
-        Processed 55 / 77 sentences
+        Processed 60 / 75 sentences
 
-        Processed 60 / 77 sentences
+=== Extracted Relation ===
+
+Sentence: [ 28 ] Gates remained in contact with Paul Allen and joined him at Honeywell during the summer of 1974. 
+Subject: Gates | Object: Honeywell
+
+Adding to set of extracted relations
+==========
 
 === Extracted Relation ===
 
@@ -189,6 +177,8 @@ Subject: Allen | Object: MITS
 Adding to set of extracted relations
 ==========
 
+        Processed 70 / 75 sentences
+
 === Extracted Relation ===
 
 Sentence: MITS president Ed Roberts agreed to meet them for a demonstration, and over the course of a few weeks they developed an Altair emulator that ran on a minicomputer, and then the BASIC interpreter. 
@@ -196,8 +186,6 @@ Subject: Ed Roberts | Object: MITS
 
 Adding to set of extracted relations
 ==========
-
-        Processed 70 / 77 sentences
 
 === Extracted Relation ===
 
@@ -220,26 +208,22 @@ Subject: Ric Weiland | Object: Microsoft
 
 Adding to set of extracted relations
 ==========
+Extracted annotations for 19 out of a total 75 sentences for this website.
+Relations extracted from this website: 20. Total: 20
 
-=== Extracted Relation ===
-
-Sentence: Microsoft's Altair BASIC was popular with computer hobbyists, but Gates discovered that a pre-market copy had leaked out and was being widely copied and distributed. 
-Subject: Bill Gates | Object: Microsoft
-
-Adding to set of extracted relations
-==========
-Extracted annotations for 24 out of a total 77 sentences for this website.
-Relations extracted from this website: 22. Total: 22
-
-URL (2/10): https://www.linkedin.com/in/williamhgates
+URL (2/10): https://www.instagram.com/thisisbillgates/?hl=en
         Fetching text from url...
         Webpage length (num characters): 0
         Annotating the webpage using spaCy...
+Extrated annotations for 0 sentences.
+Relations Extracted from this website: 0
 
-URL (3/10): https://www.instagram.com/thisisbillgates/?hl=en
+URL (3/10): https://www.linkedin.com/in/williamhgates
         Fetching text from url...
         Webpage length (num characters): 0
         Annotating the webpage using spaCy...
+Extrated annotations for 0 sentences.
+Relations Extracted from this website: 0
 
 URL (4/10): https://x.com/billgates
         Fetching text from url...
@@ -248,32 +232,32 @@ URL (4/10): https://x.com/billgates
         Extracted 4 sentences. Processing each one for correct entity pairings...
 
         Processed 4 / 4 sentences
-Extracted annotations for 0 out of a total 4 sentences for this website.
-Relations extracted from this website: 0. Total: 22
+Extracted annotations for 1 out of a total 4 sentences for this website.
+Relations extracted from this website: 0. Total: 20
 
-URL (5/10): https://news.microsoft.com/2020/03/13/microsoft-announces-change-to-its-board-of-directors/
-        Fetching text from url...
-        Webpage length (num characters): 19
-        Annotating the webpage using spaCy...
-        Extracted 1 sentences. Processing each one for correct entity pairings...
-Extracted annotations for 0 out of a total 1 sentences for this website.
-Relations extracted from this website: 0. Total: 22
-
-URL (6/10): https://www.gatesnotes.com/
+URL (5/10): https://www.gatesnotes.com/
         Fetching text from url...
         Webpage length (num characters): 198
         Annotating the webpage using spaCy...
         Extracted 2 sentences. Processing each one for correct entity pairings...
 Extracted annotations for 0 out of a total 2 sentences for this website.
-Relations extracted from this website: 0. Total: 22
+Relations extracted from this website: 0. Total: 20
 
-URL (7/10): https://www.youtube.com/user/thegatesnotes
+URL (6/10): https://news.microsoft.com/2020/03/13/microsoft-announces-change-to-its-board-of-directors/
+        Fetching text from url...
+        Webpage length (num characters): 19
+        Annotating the webpage using spaCy...
+        Extracted 1 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 1 sentences for this website.
+Relations extracted from this website: 0. Total: 20
+
+URL (7/10): https://www.youtube.com/billgates
         Fetching text from url...
         Webpage length (num characters): 164
         Annotating the webpage using spaCy...
         Extracted 2 sentences. Processing each one for correct entity pairings...
 Extracted annotations for 0 out of a total 2 sentences for this website.
-Relations extracted from this website: 0. Total: 22
+Relations extracted from this website: 0. Total: 20
 
 URL (8/10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-for-july-2008-transition-for-bill-gates/
         Fetching text from url...
@@ -281,7 +265,7 @@ URL (8/10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-for-
         Annotating the webpage using spaCy...
         Extracted 1 sentences. Processing each one for correct entity pairings...
 Extracted annotations for 0 out of a total 1 sentences for this website.
-Relations extracted from this website: 0. Total: 22
+Relations extracted from this website: 0. Total: 20
 
 URL (9/10): https://www.microsoft.com/
         Fetching text from url...
@@ -289,24 +273,294 @@ URL (9/10): https://www.microsoft.com/
         Annotating the webpage using spaCy...
         Extracted 1 sentences. Processing each one for correct entity pairings...
 Extracted annotations for 0 out of a total 1 sentences for this website.
-Relations extracted from this website: 0. Total: 22
+Relations extracted from this website: 0. Total: 20
 
 URL (10/10): https://answers.microsoft.com/en-us/windows/forum/all/a-short-letter-to-bill-gates/59fdd4d0-6330-40da-9e66-fa6c29836454
         Fetching text from url...
         Webpage length (num characters): 0
         Annotating the webpage using spaCy...
+Extrated annotations for 0 sentences.
+Relations Extracted from this website: 0
 
-============ FINAL EXTRACTED RELATIONS (22) ============
+============ FINAL EXTRACTED RELATIONS (20) ============
 
-Subject: Allen  Object: Intel
-Subject: Bill Gates     Object: Microsoft
-Subject: Satya Nadella  Object: Microsoft
-Subject: Paul Allen     Object: Microsoft
-Subject: Ric Weiland    Object: Microsoft
-Subject: Kent Evans     Object: Computer Center Corporation
 Subject: Gates  Object: Cascade Investment
+Subject: Ric Weiland    Object: Computer Center Corporation
+Subject: Paul Allen     Object: Honeywell
+Subject: Gates  Object: TerraPower
 Subject: Gates  Object: Gates Ventures
-Subject: Paul Allen     Object: Computer Center Corporation
-Subject: Steve Ballmer  Object: Microsoft
+Subject: Paul Allen     Object: Microsoft
+Subject: Kent Evans     Object: Computer Center Corporation
+Subject: Gates  Object: Honeywell
+Subject: Gates  Object: Intel
+Subject: Allen  Object: MITS
 
 Total ISE iterations: 1
+(dbproj_local) (base) MBP-1278:advancedDB-project2 kiraariyan$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Transcript for -spanbert 2 0.7 "bill gates microsoft" 10
+
+
+
+Parameters:
+Client key     = AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY
+Engine key     = d29acf7ff2d2f40a9
+Gemini key     = AIzaSyBzTTV9qedmDGr-IjLhNYT9pzOAHpHOOIc
+Method         = spanbert
+Relation       = Work_For
+Threshold      = 0.7
+Query          = bill gates microsoft
+# of Tuples    = 10
+
+Loading spaCy model...
+Loading SpanBERT model...
+
+=========== Iteration: 0 - Query: bill gates microsoft ===========
+
+URL (1/10): https://en.wikipedia.org/wiki/Bill_Gates
+	Fetching text from url...
+	Trimming webpage content from 121163 to 10000 characters
+	Webpage length (num characters): 10000
+	Annotating the webpage using spaCy...
+	Extracted 77 sentences. Processing...
+	✔ SpanBERT: Harvard College → Microsoft (conf=0.53)
+
+URL (2/10): https://www.linkedin.com/in/williamhgates
+	Fetching text from url...
+	Webpage length (num characters): 0
+	Annotating the webpage using spaCy...
+
+URL (3/10): https://www.instagram.com/thisisbillgates/?hl=en
+	Fetching text from url...
+	Webpage length (num characters): 0
+	Annotating the webpage using spaCy...
+
+URL (4/10): https://x.com/billgates
+	Fetching text from url...
+	Webpage length (num characters): 249
+	Annotating the webpage using spaCy...
+	Extracted 4 sentences. Processing...
+
+URL (5/10): https://news.microsoft.com/2020/03/13/microsoft-announces-change-to-its-board-of-directors/
+	Fetching text from url...
+	Webpage length (num characters): 19
+	Annotating the webpage using spaCy...
+	Extracted 1 sentences. Processing...
+
+URL (6/10): https://www.gatesnotes.com/
+	Fetching text from url...
+	Webpage length (num characters): 198
+	Annotating the webpage using spaCy...
+	Extracted 2 sentences. Processing...
+
+URL (7/10): https://www.youtube.com/user/thegatesnotes
+	Fetching text from url...
+	Webpage length (num characters): 164
+	Annotating the webpage using spaCy...
+	Extracted 2 sentences. Processing...
+
+URL (8/10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-for-july-2008-transition-for-bill-gates/
+	Fetching text from url...
+	Webpage length (num characters): 19
+	Annotating the webpage using spaCy...
+	Extracted 1 sentences. Processing...
+
+URL (9/10): https://www.microsoft.com/
+	Fetching text from url...
+	Webpage length (num characters): 430
+	Annotating the webpage using spaCy...
+	Extracted 1 sentences. Processing...
+
+URL (10/10): https://answers.microsoft.com/en-us/windows/forum/all/a-short-letter-to-bill-gates/59fdd4d0-6330-40da-9e66-fa6c29836454
+	Fetching text from url...
+	Webpage length (num characters): 0
+	Annotating the webpage using spaCy...
+
+=========== Iteration: 1 - Query: Harvard College Microsoft ===========
+
+URL (1/10): https://www.huit.harvard.edu/microsoft-365
+	Fetching text from url...
+	Webpage length (num characters): 2524
+	Annotating the webpage using spaCy...
+	Extracted 11 sentences. Processing...
+
+URL (2/10): https://it.hms.harvard.edu/teams
+	Fetching text from url...
+	Webpage length (num characters): 1269
+	Annotating the webpage using spaCy...
+	Extracted 6 sentences. Processing...
+
+URL (3/10): https://www.huit.harvard.edu/office-365
+	Fetching text from url...
+	Webpage length (num characters): 3187
+	Annotating the webpage using spaCy...
+	Extracted 17 sentences. Processing...
+
+URL (4/10): https://hsph.harvard.edu/office/student-affairs/
+	Fetching text from url...
+	Webpage length (num characters): 2364
+	Annotating the webpage using spaCy...
+	Extracted 17 sentences. Processing...
+
+URL (5/10): https://www.huit.harvard.edu/outlook
+	Fetching text from url...
+	Webpage length (num characters): 3297
+	Annotating the webpage using spaCy...
+	Extracted 17 sentences. Processing...
+
+URL (6/10): https://careerservices.fas.harvard.edu/resources/bullet-point-resume-template/
+	Fetching text from url...
+	Webpage length (num characters): 5984
+	Annotating the webpage using spaCy...
+	Extracted 23 sentences. Processing...
+
+URL (7/10): https://college.harvard.edu/student-life/student-stories/my-unofficial-tips-interviews
+	Fetching text from url...
+	Trimming webpage content from 18949 to 10000 characters
+	Webpage length (num characters): 10000
+	Annotating the webpage using spaCy...
+	Extracted 108 sentences. Processing...
+
+URL (8/10): https://imaginecup.microsoft.com/pt-pt/Team/Index/fffa40b5-4724-498e-a04b-5aadb50108ba
+	Fetching text from url...
+	Webpage length (num characters): 5903
+	Annotating the webpage using spaCy...
+	Extracted 37 sentences. Processing...
+	✔ SpanBERT: Harvard → the Shorenstein Center (conf=0.80)
+
+URL (9/10): https://college.harvard.edu/student-life/student-stories/my-top-tips-applying-harvard
+	Fetching text from url...
+	Trimming webpage content from 19853 to 10000 characters
+	Webpage length (num characters): 10000
+	Annotating the webpage using spaCy...
+	Extracted 84 sentences. Processing...
+
+URL (10/10): https://dso.college.harvard.edu/people/people-type/residential
+	Fetching text from url...
+	Webpage length (num characters): 2981
+	Annotating the webpage using spaCy...
+	Extracted 12 sentences. Processing...
+
+=========== Iteration: 2 - Query: Harvard the Shorenstein Center ===========
+
+URL (1/10): https://shorensteincenter.org/
+	Fetching text from url...
+	Webpage length (num characters): 4291
+	Annotating the webpage using spaCy...
+	Extracted 26 sentences. Processing...
+	✔ SpanBERT: PRIVACY → ACCESSIBILITY (conf=0.90)
+	✔ SpanBERT: ACCESSIBILITY → ACCESSIBILITY (conf=0.73)
+
+URL (2/10): https://en.wikipedia.org/wiki/Shorenstein_Center_on_Media,_Politics_and_Public_Policy
+	Fetching text from url...
+	Trimming webpage content from 12989 to 10000 characters
+	Webpage length (num characters): 10000
+	Annotating the webpage using spaCy...
+	Extracted 138 sentences. Processing...
+	✔ SpanBERT: The Shorenstein Center → Harvard Kennedy School (conf=0.83)
+
+URL (3/10): https://shorensteincenter.org/programs/fellowships/
+	Fetching text from url...
+	Webpage length (num characters): 3228
+	Annotating the webpage using spaCy...
+	Extracted 20 sentences. Processing...
+
+URL (4/10): https://worldwide.harvard.edu/joan-shorenstein-center-press-politics-and-public-policy-fellowship-program
+	Fetching text from url...
+	Webpage length (num characters): 51
+	Annotating the webpage using spaCy...
+	Extracted 1 sentences. Processing...
+
+URL (5/10): https://shorensteincenter.org/about-us/faculty-and-staff/
+	Fetching text from url...
+	Webpage length (num characters): 6303
+	Annotating the webpage using spaCy...
+	Extracted 14 sentences. Processing...
+
+URL (6/10): https://www.hks.harvard.edu/more/about/leadership-administration/executive-director-shorenstein
+	Fetching text from url...
+	Webpage length (num characters): 2678
+	Annotating the webpage using spaCy...
+	Extracted 14 sentences. Processing...
+	✔ SpanBERT: Laura → the Technology and Public Purpose (conf=0.89)
+	✔ SpanBERT: Laura → TAPP (conf=0.89)
+	✔ SpanBERT: the Technology and Public Purpose → TAPP (conf=0.72)
+	✔ SpanBERT: Laura → the NYU Wagner School of Public Policy (conf=0.97)
+	✔ SpanBERT: Laura → Data for Social Innovation and Instructor (conf=0.92)
+	✔ SpanBERT: Laura → the Harvard University Extension School (conf=0.83)
+	✔ SpanBERT: Laura → Data-Driven Decision Making for Business Leaders (conf=0.97)
+	✔ SpanBERT: the NYU Wagner School of Public Policy → Data for Social Innovation and Instructor (conf=0.85)
+	✔ SpanBERT: the NYU Wagner School of Public Policy → Data-Driven Decision Making for Business Leaders (conf=0.96)
+	✔ SpanBERT: Data for Social Innovation and Instructor → Data-Driven Decision Making for Business Leaders (conf=0.88)
+	✔ SpanBERT: the World Bank Group → the United Nations Department for Economic and Social Affairs (conf=0.91)
+
+URL (7/10): https://shorensteincenter.org/about-us/
+	Fetching text from url...
+	Webpage length (num characters): 5093
+	Annotating the webpage using spaCy...
+	Extracted 30 sentences. Processing...
+
+URL (8/10): https://news.harvard.edu/gazette/story/newsplus/shorenstein-center-announces-spring-2017-fellows/
+	Fetching text from url...
+	Webpage length (num characters): 2868
+	Annotating the webpage using spaCy...
+	Extracted 15 sentences. Processing...
+	✔ SpanBERT: Nicco Mele → Center (conf=0.83)
+	✔ SpanBERT: Helen Boaden → BBC Radio (conf=0.95)
+	✔ SpanBERT: Farai Chideya → CNN (conf=0.52)
+	✔ SpanBERT: Zack Exley → Bernie Sanders (conf=0.80)
+	✔ SpanBERT: Chan School → Andrea Baccarelli (conf=0.82)
+	✔ SpanBERT: Chan School → Campus & Community (conf=0.99)
+	✔ SpanBERT: Chan School → Harvard (conf=0.99)
+	✔ SpanBERT: Andrea Baccarelli → School (conf=0.85)
+	✔ SpanBERT: School → Campus & Community (conf=0.95)
+	✔ SpanBERT: School → Harvard (conf=0.94)
+
+URL (9/10): https://shorensteincenter.org/news-events/
+	Fetching text from url...
+	Webpage length (num characters): 4742
+	Annotating the webpage using spaCy...
+	Extracted 28 sentences. Processing...
+
+URL (10/10): https://x.com/shorensteinctr
+	Fetching text from url...
+	Webpage length (num characters): 249
+	Annotating the webpage using spaCy...
+	Extracted 4 sentences. Processing...
+
+10 tuples extracted, stopping iteration.
+
+============ FINAL EXTRACTED RELATIONS (26) ============
+
+Subject: Harvard College	Object: Microsoft	Confidence: 0.53
+Subject: Harvard	Object: the Shorenstein Center	Confidence: 0.80
+Subject: PRIVACY	Object: ACCESSIBILITY	Confidence: 0.90
+Subject: ACCESSIBILITY	Object: ACCESSIBILITY	Confidence: 0.73
+Subject: The Shorenstein Center	Object: Harvard Kennedy School	Confidence: 0.83
+Subject: Laura	Object: the Technology and Public Purpose	Confidence: 0.89
+Subject: Laura	Object: TAPP	Confidence: 0.89
+Subject: the Technology and Public Purpose	Object: TAPP	Confidence: 0.72
+Subject: Laura	Object: the NYU Wagner School of Public Policy	Confidence: 0.97
+Subject: Laura	Object: Data for Social Innovation and Instructor	Confidence: 0.92
+
+Total ISE iterations: 3

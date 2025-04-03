@@ -123,14 +123,19 @@ Query          = {seed_query}
 
     #initialize spanbert model
     if method == 'spanbert':
-        print("Loading SpanBERT model...")
-        pretrained_dir = "pretrained_spanbert"  # or the actual folder name
-        tokenizer = BertTokenizer.from_pretrained(pretrained_dir, local_files_only=True)
-        config = BertConfig.from_pretrained("./pretrained_spanbert", local_files_only=True)
-        model = BertForSequenceClassification.from_pretrained("./pretrained_spanbert", config=config, local_files_only=True)
+        # loads BERT tokenizer and config and pre trained weights from directory
+        
+        tokenizer = BertTokenizer.from_pretrained("./pretrained_spanbert")
+        config = BertConfig.from_pretrained("./pretrained_spanbert")
+
+        #Set number of classification labels expected by  model
+        config.num_labels = 42
+        model = BertForSequenceClassification(config)
         state_dict = torch.load("./pretrained_spanbert/pytorch_model.bin", map_location="cpu")
         model.load_state_dict(state_dict)
         model.eval()
+
+        #relation labels used by the model from relations.txt
 
         with open("./pretrained_spanbert/relations.txt", "r") as f:
             labels = [line.strip() for line in f.readlines()]
@@ -162,6 +167,7 @@ Query          = {seed_query}
             print("\tFetching text from url...")
             raw_text = fetch_page_text(url)
             if not raw_text:
+                print("Extrated annotations for 0 sentences.\nRelations Extracted from this website: 0")
                 continue
 
             doc = nlp(raw_text) #use spacy
@@ -180,7 +186,7 @@ Query          = {seed_query}
 
                     #entity pairs must contain BOTH kinds of entities for the sentence to be prompted into gemini
                     if method == 'gemini':
-                        filtered = []
+                        filtered = [] #ensures we only prompt valid sentences
                         for _, e1, e2 in pairs:
                             e1_type, e2_type = e1[1], e2[1]
                             if r != 3:
@@ -193,8 +199,9 @@ Query          = {seed_query}
                                 if ((e1_type == "PERSON" and e2_type in valid_locs) or
                                     (e2_type == "PERSON" and e1_type in valid_locs)):
                                     filtered.append((e1, e2))
-                        #if sentence contains required entity types, prompt sentence into gemini
+                        #if sentence contains required entity types, prompt sentence into gemini, otherwise DO NOT PROMPT
                         if filtered:
+                            annotated +=1
                             prompt = f"{prompt_template} Here is the sentence: {sent}. If no such relation is found, return nothing."
                             try:
                                 response = get_gemini(prompt, "gemini-2.0-flash", 100, 0.2, 1, 32)
@@ -221,20 +228,26 @@ Query          = {seed_query}
                                         print(f"\nAdding to set of extracted relations")
                                         X.add((subj, obj, 1.0))
                                         extracted_count +=1
-                                    annotated +=1
+                                    
                                     print(f"==========")  
 
                     elif method == 'spanbert':
+
+                        # loops through all entity pairs
                         for _, subj_ent, obj_ent in pairs:
+                            # etract the subject and object text and entity types
                             subj_text, subj_type = subj_ent[0], subj_ent[1]
                             obj_text, obj_type = obj_ent[0], obj_ent[1]
                             marked = sent.text.replace(subj_text, f"[E1] {subj_text} [/E1]").replace(obj_text, f"[E2] {obj_text} [/E2]")
+                            #tokenize the  sentence for input to model
                             inputs = tokenizer(marked, return_tensors="pt", truncation=True, max_length=512)
+                            # run the model on the input without gradient tracking
                             with torch.no_grad():
                                 outputs = model(**inputs)
                                 probs = torch.nn.functional.softmax(outputs.logits, dim=-1)[0]
                                 pred_idx = torch.argmax(probs).item()
                                 pred_label = label_map[pred_idx]
+                                # extract the confidence score for  predicted label and determine if its valid based on expected label
                                 confidence = probs[pred_idx].item()
 
                                 if r == 3:
@@ -251,7 +264,7 @@ Query          = {seed_query}
                                         4: "org:top_members/employees"
                                     }
                                     is_valid = pred_label == target_labels[r]
-
+                                # if is valid and passes confidence threshold then we add to set
                                 if is_valid and confidence >= t:
                                     if (subj_text, obj_text) not in X:
                                         X.add((subj_text, obj_text,confidence))
@@ -272,7 +285,6 @@ Query          = {seed_query}
                 total_extracted += extracted_count
                 print(f"Relations extracted from this website: {extracted_count}. Total: {total_extracted}")
             
-
         
         if len(X) < k:    
             candidates = [tup for tup in X if tup not in queried]
