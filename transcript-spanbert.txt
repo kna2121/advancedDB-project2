@@ -217,4 +217,3 @@ Subject: Laura              Object: the NYU Wagner School of Public Policy
 Subject: Laura              Object: Data for Social Innovation and Instructor
 
 Total ISE iterations: 3
-(dbproj_local) (base) MacBook-Pro-1278:advancedDB-project2 kiraariyan$
