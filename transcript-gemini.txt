@@ -1,0 +1,309 @@
+Parameters:
+Client key     = AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY
+Engine key     = d29acf7ff2d2f40a9
+Gemini key     = AIzaSyBH4UBuhu9hLgk4mDUkQfbeZkxkPz4toNk
+Method         = gemini
+Relation       = Work_For
+Threshold      = 0.0
+Query          = bill gates microsoft
+# of Tuples    = 10
+
+
+=========== Iteration: 0 - Query: bill gates microsoft ===========
+
+URL (1/10): https://en.wikipedia.org/wiki/Bill_Gates
+        Fetching text from url...
+        Trimming webpage content from 121560 to 10000 characters
+        Webpage length (num characters): 10000
+        Annotating the webpage using spaCy...
+        Extracted 75 sentences. Processing each one for correct entity pairings...
+
+=== Extracted Relation ===
+
+Sentence: Bill Gates - Wikipedia Jump to content From Wikipedia, the free encyclopedia American businessman and philanthropist (born 1955) 
+Subject: Bill Gates | Object: Wikipedia
+
+Adding to set of extracted relations
+==========
+
+        Processed 5 / 75 sentences
+
+=== Extracted Relation ===
+
+Sentence: A pioneer of the microcomputer revolution of the 1970s and 1980s, he co-founded the software company Microsoft in 1975 with his childhood friend Paul Allen . 
+Subject: Paul Allen | Object: Microsoft
+
+Adding to set of extracted relations
+==========
+
+        Processed 10 / 75 sentences
+
+=== Extracted Relation ===
+
+Sentence: He stepped down as chairman of the board in 2014 and became technology adviser to CEO Satya Nadella and other Microsoft leaders, a position he still holds. 
+Subject: He | Object: Microsoft
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: Gates is founder and chairman of several other companies, including BEN , Cascade Investment , TerraPower , Gates Ventures , and Breakthrough Energy . 
+Subject: Gates | Object: BEN
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: Gates is founder and chairman of several other companies, including BEN , Cascade Investment , TerraPower , Gates Ventures , and Breakthrough Energy . 
+Subject: Gates | Object: Cascade Investment
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: Gates is founder and chairman of several other companies, including BEN , Cascade Investment , TerraPower , Gates Ventures , and Breakthrough Energy . 
+Subject: Gates | Object: TerraPower
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: Gates is founder and chairman of several other companies, including BEN , Cascade Investment , TerraPower , Gates Ventures , and Breakthrough Energy . 
+Subject: Gates | Object: Gates Ventures
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: Gates is founder and chairman of several other companies, including BEN , Cascade Investment , TerraPower , Gates Ventures , and Breakthrough Energy . 
+Subject: Gates | Object: Breakthrough Energy
+
+Adding to set of extracted relations
+==========
+
+        Processed 35 / 75 sentences
+
+        Processed 40 / 75 sentences
+
+=== Extracted Relation ===
+
+Sentence: One of these systems was a PDP-10 belonging to Computer Center Corporation (CCC) which banned Gates, Paul Allen , Ric Weiland , and Gates's best friend and first business partner Kent Evans for the summer after it caught them exploiting bugs in the operating system to obtain free computer time. 
+Subject: Paul Allen | Object: Computer Center Corporation
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: One of these systems was a PDP-10 belonging to Computer Center Corporation (CCC) which banned Gates, Paul Allen , Ric Weiland , and Gates's best friend and first business partner Kent Evans for the summer after it caught them exploiting bugs in the operating system to obtain free computer time. 
+Subject: Ric Weiland | Object: Computer Center Corporation
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: One of these systems was a PDP-10 belonging to Computer Center Corporation (CCC) which banned Gates, Paul Allen , Ric Weiland , and Gates's best friend and first business partner Kent Evans for the summer after it caught them exploiting bugs in the operating system to obtain free computer time. 
+Subject: Kent Evans | Object: Computer Center Corporation
+
+Adding to set of extracted relations
+==========
+
+        Processed 50 / 75 sentences
+
+        Processed 55 / 75 sentences
+
+=== Extracted Relation ===
+
+Sentence: [ 23 ] While at Harvard, he met fellow student and future Microsoft CEO Steve Ballmer . 
+Subject: Steve Ballmer | Object: Microsoft
+
+Adding to set of extracted relations
+==========
+
+        Processed 60 / 75 sentences
+
+=== Extracted Relation ===
+
+Sentence: [ 28 ] Gates remained in contact with Paul Allen and joined him at Honeywell during the summer of 1974. 
+Subject: Paul Allen | Object: Honeywell
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: In 1975, the MITS Altair 8800 was released based on the Intel 8080 CPU , and Gates and Allen saw the opportunity to start their own computer software company. 
+Subject: Gates | Object: Intel
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: In 1975, the MITS Altair 8800 was released based on the Intel 8080 CPU , and Gates and Allen saw the opportunity to start their own computer software company. 
+Subject: Allen | Object: Intel
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: [ 32 ] Microsoft Further information: History of Microsoft and Microsoft History BASIC MITS Altair 8800 Computer with 8-inch (200mm) floppy disk system whose first programming language was Microsoft's founding product, Altair BASIC Gates read the January 1975 issue of Popular Electronics which demonstrated the Altair 8800 , and contacted Micro Instrumentation and Telemetry Systems (MITS) to inform them that he and others were working on a BASIC interpreter for the platform. 
+Subject: Gates | Object: Micro Instrumentation and Telemetry Systems
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: [ 33 ] In reality, Gates and Allen did not have an Altair and had not written code for it; they merely wanted to gauge MITS's interest. 
+Subject: Bill Gates | Object: MITS
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: [ 33 ] In reality, Gates and Allen did not have an Altair and had not written code for it; they merely wanted to gauge MITS's interest. 
+Subject: Paul Allen | Object: MITS
+
+Adding to set of extracted relations
+==========
+
+        Processed 70 / 75 sentences
+
+=== Extracted Relation ===
+
+Sentence: MITS president Ed Roberts agreed to meet them for a demonstration, and over the course of a few weeks they developed an Altair emulator that ran on a minicomputer, and then the BASIC interpreter. 
+Subject: Ed Roberts | Object: MITS
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: MITS hired Allen, [ 34 ] and Gates took a leave of absence from Harvard to work with him at MITS in November 1975. 
+Subject: Allen | Object: MITS
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: MITS hired Allen, [ 34 ] and Gates took a leave of absence from Harvard to work with him at MITS in November 1975. 
+Subject: Gates | Object: MITS
+
+Adding to set of extracted relations
+==========
+
+=== Extracted Relation ===
+
+Sentence: The first employee Gates and Allen hired was their high school collaborator Ric Weiland . 
+Subject: Ric Weiland | Object: Microsoft
+
+Adding to set of extracted relations
+==========
+Extracted annotations for 13 out of a total 75 sentences for this website.
+Relations extracted from this website: 22. Total: 22
+
+URL (2/10): https://www.instagram.com/thisisbillgates/?hl=en
+        Fetching text from url...
+        Webpage length (num characters): 59
+        Annotating the webpage using spaCy...
+        Extracted 1 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 1 sentences for this website.
+Relations extracted from this website: 0. Total: 22
+
+URL (3/10): https://www.linkedin.com/in/williamhgates
+        Fetching text from url...
+        Webpage length (num characters): 0
+        Annotating the webpage using spaCy...
+
+URL (4/10): https://x.com/billgates
+        Fetching text from url...
+        Webpage length (num characters): 249
+        Annotating the webpage using spaCy...
+        Extracted 4 sentences. Processing each one for correct entity pairings...
+
+        Processed 4 / 4 sentences
+Extracted annotations for 0 out of a total 4 sentences for this website.
+Relations extracted from this website: 0. Total: 22
+
+URL (5/10): https://www.gatesnotes.com/
+        Fetching text from url...
+        Webpage length (num characters): 212
+        Annotating the webpage using spaCy...
+        Extracted 2 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 2 sentences for this website.
+Relations extracted from this website: 0. Total: 22
+
+URL (6/10): https://news.microsoft.com/2020/03/13/microsoft-announces-change-to-its-board-of-directors/
+        Fetching text from url...
+        Webpage length (num characters): 33
+        Annotating the webpage using spaCy...
+        Extracted 1 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 1 sentences for this website.
+Relations extracted from this website: 0. Total: 22
+
+URL (7/10): https://www.youtube.com/billgates
+        Fetching text from url...
+        Webpage length (num characters): 185
+        Annotating the webpage using spaCy...
+        Extracted 1 sentences. Processing each one for correct entity pairings...
+
+        Processed 1 / 1 sentences
+
+=== Extracted Relation ===
+
+Sentence: Bill Gates - YouTube About Press Copyright Contact us Creators Advertise Developers Terms Privacy Policy & Safety How YouTube works Test new features NFL Sunday Ticket  2025 Google LLC 
+Subject: Bill Gates | Object: Google LLC
+
+Adding to set of extracted relations
+==========
+Extracted annotations for 1 out of a total 1 sentences for this website.
+Relations extracted from this website: 1. Total: 23
+
+URL (8/10): https://www.gatesnotes.com/microsoft-original-source-code
+        Fetching text from url...
+        Webpage length (num characters): 242
+        Annotating the webpage using spaCy...
+        Extracted 2 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 2 sentences for this website.
+Relations extracted from this website: 0. Total: 23
+
+URL (9/10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-for-july-2008-transition-for-bill-gates/
+        Fetching text from url...
+        Webpage length (num characters): 33
+        Annotating the webpage using spaCy...
+        Extracted 1 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 1 sentences for this website.
+Relations extracted from this website: 0. Total: 23
+
+URL (10/10): https://www.microsoft.com/
+        Fetching text from url...
+        Webpage length (num characters): 524
+        Annotating the webpage using spaCy...
+        Extracted 3 sentences. Processing each one for correct entity pairings...
+Extracted annotations for 0 out of a total 3 sentences for this website.
+Relations extracted from this website: 0. Total: 23
+
+============ FINAL EXTRACTED RELATIONS (Top-10 out of total 23) ============
+
+Subject: Paul Allen     Object: MITS
+Subject: Gates  Object: MITS
+Subject: Ed Roberts     Object: MITS
+Subject: Paul Allen     Object: Honeywell
+Subject: Bill Gates     Object: MITS
+Subject: Bill Gates     Object: Google LLC
+Subject: Gates  Object: Cascade Investment
+Subject: Paul Allen     Object: Microsoft
+Subject: Paul Allen     Object: Computer Center Corporation
+Subject: Gates  Object: Gates Ventures
+
+Total ISE iterations: 1
