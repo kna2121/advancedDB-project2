@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+spacy
+torch
+transformers
+google-api-python-client
+google-generativeai
