@@ -118,17 +118,18 @@ Query          = {seed_query}
 # of Tuples    = {k}
 """)
 
-    print("Loading necessary libraries...")
+    # print("Loading necessary libraries...")
     nlp = spacy.load("en_core_web_sm")
 
     #initialize spanbert model
     if method == 'spanbert':
+        # print("Loading SpanBERT model...")
         # loads BERT tokenizer and config and pre trained weights from directory
         
         tokenizer = BertTokenizer.from_pretrained("./pretrained_spanbert")
         config = BertConfig.from_pretrained("./pretrained_spanbert")
 
-        #Set number of classification labels expected by  model
+        #Set  number of classification labels expected by  model
         config.num_labels = 42
         model = BertForSequenceClassification(config)
         state_dict = torch.load("./pretrained_spanbert/pytorch_model.bin", map_location="cpu")
@@ -167,7 +168,6 @@ Query          = {seed_query}
             print("\tFetching text from url...")
             raw_text = fetch_page_text(url)
             if not raw_text:
-                print("Extrated annotations for 0 sentences.\nRelations Extracted from this website: 0")
                 continue
 
             doc = nlp(raw_text) #use spacy
@@ -186,7 +186,7 @@ Query          = {seed_query}
 
                     #entity pairs must contain BOTH kinds of entities for the sentence to be prompted into gemini
                     if method == 'gemini':
-                        filtered = [] #ensures we only prompt valid sentences
+                        filtered = []
                         for _, e1, e2 in pairs:
                             e1_type, e2_type = e1[1], e2[1]
                             if r != 3:
@@ -199,7 +199,7 @@ Query          = {seed_query}
                                 if ((e1_type == "PERSON" and e2_type in valid_locs) or
                                     (e2_type == "PERSON" and e1_type in valid_locs)):
                                     filtered.append((e1, e2))
-                        #if sentence contains required entity types, prompt sentence into gemini, otherwise DO NOT PROMPT
+                        #if sentence contains required entity types, prompt sentence into gemini
                         if filtered:
                             annotated +=1
                             prompt = f"{prompt_template} Here is the sentence: {sent}. If no such relation is found, return nothing."
@@ -245,9 +245,10 @@ Query          = {seed_query}
                                 if ((e1_type == "PERSON" and e2_type in valid_locs) or
                                     (e2_type == "PERSON" and e1_type in valid_locs)):
                                     filtered.append((e1, e2))
+
                         # loops through all entity pairs
-                        for _, subj_ent, obj_ent in filtered:
-                            # extract the subject and object text and entity types
+                        for _, subj_ent, obj_ent in pairs:
+                            # etract the subject and object text and entity types
                             subj_text, subj_type = subj_ent[0], subj_ent[1]
                             obj_text, obj_type = obj_ent[0], obj_ent[1]
                             marked = sent.text.replace(subj_text, f"[E1] {subj_text} [/E1]").replace(obj_text, f"[E2] {obj_text} [/E2]")
@@ -279,12 +280,8 @@ Query          = {seed_query}
                                 # if is valid and passes confidence threshold then we add to set
                                 if is_valid and confidence >= t:
                                     if (subj_text, obj_text) not in X:
-                                        X.add((subj_text, obj_text,confidence))
-                                        print(f"\n=== Extracted Relation ===")
-                                        print(f'Sentence: {sent}\n')
-                                        print(f"Subject: {subj_text} | Object: {obj_text} Confidence: {confidence}\n")
-                                        X.add((subj, obj, conf))
-                                        print(f"==========")
+                                        X.add(subj_text, obj_text,confidence)
+                                        print(f"\t Subject: {subj_text} | Object:{obj_text} (conf={confidence})")
 
                 except Exception as e:
                     print(f"\tSkipped sentence due to error: {e}")
@@ -297,6 +294,7 @@ Query          = {seed_query}
                 total_extracted += extracted_count
                 print(f"Relations extracted from this website: {extracted_count}. Total: {total_extracted}")
             
+
         
         if len(X) < k:    
             candidates = [tup for tup in X if tup not in queried]
