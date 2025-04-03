@@ -124,10 +124,10 @@ Query          = {seed_query}
     #initialize spanbert model
     if method == 'spanbert':
         print("Loading SpanBERT model...")
-        tokenizer = BertTokenizer.from_pretrained("./pretrained_spanbert")
-        config = BertConfig.from_pretrained("./pretrained_spanbert")
-        config.num_labels = 42
-        model = BertForSequenceClassification(config)
+        pretrained_dir = "pretrained_spanbert"  # or the actual folder name
+        tokenizer = BertTokenizer.from_pretrained(pretrained_dir, local_files_only=True)
+        config = BertConfig.from_pretrained("./pretrained_spanbert", local_files_only=True)
+        model = BertForSequenceClassification.from_pretrained("./pretrained_spanbert", config=config, local_files_only=True)
         state_dict = torch.load("./pretrained_spanbert/pytorch_model.bin", map_location="cpu")
         model.load_state_dict(state_dict)
         model.eval()
@@ -254,8 +254,12 @@ Query          = {seed_query}
 
                                 if is_valid and confidence >= t:
                                     if (subj_text, obj_text) not in X:
-                                        X.add(subj_text, obj_text,confidence)
-                                        print(f"\t Subject: {subj_text} | Object:{obj_text} (conf={confidence})")
+                                        X.add((subj_text, obj_text,confidence))
+                                        print(f"\n=== Extracted Relation ===")
+                                        print(f'Sentence: {sent}\n')
+                                        print(f"Subject: {subj_text} | Object: {obj_text} Confidence: {confidence}\n")
+                                        X.add((subj, obj, conf))
+                                        print(f"==========")
 
                 except Exception as e:
                     print(f"\tSkipped sentence due to error: {e}")
