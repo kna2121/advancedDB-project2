@@ -3,7 +3,7 @@ a.
 - Ralph Betesh - rb3557  
 
 b. Submitted Files
-- integrated.py  
+- integratedCode.py  
 - spacy_help.py  
 - spanbert.py  
 - example_relations.py  
@@ -28,9 +28,9 @@ python -m spacy download en_core_web_sm
 python integrated.py [method] [relation_id] [threshold] [seed_query] [k]
 
 ex:
-python integrated.py spanbert 2 0.7 "bill gates microsoft" 10
+python integratedCode.py spanbert 2 0.7 "bill gates microsoft" 10
 
-- method: spanbert or gemini  
+- method: spanbert or gemini 
 - relation_id: 1 = Schools_Attended, 2 = Work_For, 3 = Live_In, 4 = Top_Member_Employees  
 - threshold: Confidence threshold (used for spanbert only)  
 - seed_query: Query string  
@@ -56,9 +56,10 @@ e.
 5. Use:
    - SpanBERT - predict relations and filter by confidence  
    - Gemini - prompt based relation extraction  
-6. Add valid pairs to result set  
-7. Use new pair to construct next query  
-8. Repeat until k tuples extracted or no progress  
+6. Add valid pairs to result set
+7. After one iteration is complete, if k tuples not met use new pair to construct next query  
+8. Repeat until k tuples extracted or no progress is made
+9. Print top k tuples as result
 
 f.
   API_KEY = 'AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY'
@@ -66,5 +67,5 @@ f.
 g.
 
 - Both spanbert and gemini methods supported from CLI  
-- We hardcoded API keys used in script  
+- We hardcoded API keys used in script, as to reduce the amount of command line arguments needed.
 - Model inference and prompt timing include 5s delay to prevent rate limits 429 errors  
