@@ -191,6 +191,7 @@ Query          = {seed_query}
                             e1_type, e2_type = e1[1], e2[1]
                             if r != 3:
                                 subj_type, obj_type = target_types[0], target_types[1]
+                                #check for BOTH entity types
                                 if ((e1_type == subj_type and e2_type == obj_type) or
                                     (e1_type == obj_type and e2_type == subj_type)):
                                     filtered.append((e1, e2))
@@ -199,18 +200,19 @@ Query          = {seed_query}
                                 if ((e1_type == "PERSON" and e2_type in valid_locs) or
                                     (e2_type == "PERSON" and e1_type in valid_locs)):
                                     filtered.append((e1, e2))
-                        #if sentence contains required entity types, prompt sentence into gemini
+
+                        #if sentence contains both required entity types, prompt sentence into gemini
                         if filtered:
                             prompt = f"{prompt_template} Here is the sentence: {sent}. If no such relation is found, return nothing."
                             try:
-                                response = get_gemini(prompt, "gemini-2.0-flash", 100, 0.2, 1, 32)
+                                response = get_gemini(prompt, "gemini-2.0-flash", 100, 0.2, 1, 32) #get gemini's response
                             except Exception as e:
                                 print(f"\tGemini API error: {e}. Continuing...")
                                 continue
-                            #get returned relation
+                            #get returned relation in specified format (from prompt)
                             if ";" in response:
                                 annotated +=1
-                                lines = response.strip().split("\n")
+                                lines = response.strip().split("\n") #could have returned multiple relations from one sentence
                                 for line in lines:
                                     extracted = line.split(";")
                                     if len(extracted) != 2:
@@ -218,7 +220,7 @@ Query          = {seed_query}
                                     subj, obj = extracted[0].strip(), extracted[1].strip()
                                     if 'unknown' in obj.lower() or 'student' in obj.lower():
                                         continue
-                                    print(f"\n=== Extracted Relation ===")
+                                    print(f"\n=== Extracted Relation ===") #print out extracted relation and its information
                                     clean_sent = ''.join(char for char in str(sent) if ord(char) < 128)
                                     print(f"\nSentence: {clean_sent} ")
                                     print(f"Subject: {subj} | Object: {obj}")
@@ -232,7 +234,7 @@ Query          = {seed_query}
                                     print(f"==========")  
 
                     elif method == 'spanbert':
-                        filtered = [] #ensures we only prompt valid sentences
+                        filtered = [] #ensures we only prompt valid sentences, again ensure it has both required entity types
                         for _, e1, e2 in pairs:
                             e1_type, e2_type = e1[1], e2[1]
                             if r != 3:
@@ -248,7 +250,7 @@ Query          = {seed_query}
 
                         # loops through all entity pairs
                         for _, subj_ent, obj_ent in pairs:
-                            # etract the subject and object text and entity types
+                            # extract the subject and object text and entity types
                             subj_text, subj_type = subj_ent[0], subj_ent[1]
                             obj_text, obj_type = obj_ent[0], obj_ent[1]
                             marked = sent.text.replace(subj_text, f"[E1] {subj_text} [/E1]").replace(obj_text, f"[E2] {obj_text} [/E2]")
@@ -296,19 +298,20 @@ Query          = {seed_query}
 
             processed.add(url)
             
-            if method == 'gemini':
+            if method == 'gemini': #print out summary information for URL
                 print(f"Extracted annotations for {annotated} out of a total {len(sentences)} sentences for this website.")
                 total_extracted += extracted_count
                 print(f"Relations extracted from this website: {extracted_count}. Total: {total_extracted}")
             
 
         
-        if len(X) < k:    
+        if len(X) < k:    #check if desired amount of tuples met 
             candidates = [tup for tup in X if tup not in queried]
             if not candidates:
                 print("ISE has stalled.")
                 break
-
+            
+            #generate new query
             y = candidates[0]
             queried.add(y)
             current_query = f"{y[0]} {y[1]}"
