@@ -59,7 +59,7 @@ def fetch_page_text(url):
     try:
         response = requests.get(url, timeout=10)
         soup = BeautifulSoup(response.text, 'html.parser')
-        for tag in soup(["style", "script", "head", "title", "table", "nav", "header"]):
+        for tag in soup(["style", "script", "table", "nav", "header"]):
             tag.decompose()
         text = soup.get_text(" ", strip=True)
         if len(text) > 10000:
@@ -201,7 +201,6 @@ Query          = {seed_query}
                                     filtered.append((e1, e2))
                         #if sentence contains required entity types, prompt sentence into gemini
                         if filtered:
-                            annotated +=1
                             prompt = f"{prompt_template} Here is the sentence: {sent}. If no such relation is found, return nothing."
                             try:
                                 response = get_gemini(prompt, "gemini-2.0-flash", 100, 0.2, 1, 32)
@@ -210,6 +209,7 @@ Query          = {seed_query}
                                 continue
                             #get returned relation
                             if ";" in response:
+                                annotated +=1
                                 lines = response.strip().split("\n")
                                 for line in lines:
                                     extracted = line.split(";")
@@ -279,9 +279,16 @@ Query          = {seed_query}
                                     is_valid = pred_label == target_labels[r]
                                 # if is valid and passes confidence threshold then we add to set
                                 if is_valid and confidence >= t:
-                                    if (subj_text, obj_text) not in X:
-                                        X.add(subj_text, obj_text,confidence)
+                                    if ((subj_text, obj_text)) not in X:
+                                        X.add((subj_text, obj_text,confidence))
+                                        print(f"\n=== Extracted Relation ===")
+                                        clean_sent = ''.join(char for char in str(sent) if ord(char) < 128)   #Removes non ASCII chars
+                                        print(f"\nSentence: {clean_sent} ")
                                         print(f"\t Subject: {subj_text} | Object:{obj_text} (conf={confidence})")
+                                        print(f"==========")  
+
+
+
 
                 except Exception as e:
                     print(f"\tSkipped sentence due to error: {e}")
@@ -308,7 +315,7 @@ Query          = {seed_query}
             iteration += 1
 
     #prints out top-k extracted relations 
-    print(f"\n============ FINAL EXTRACTED RELATIONS ({len(X)}) ============\n")
+    print(f"\n============ FINAL EXTRACTED RELATIONS (Top-{k} out of total {len(X)}) ============\n")
     for subj, obj, conf in list(X)[:k]: #prints top k extracted relations
         if method == 'spanbert':
             print(f"Subject: {subj}\tObject: {obj}\tConfidence: {conf:.2f}")
