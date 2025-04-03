@@ -232,10 +232,22 @@ Query          = {seed_query}
                                     print(f"==========")  
 
                     elif method == 'spanbert':
-
+                        filtered = [] #ensures we only prompt valid sentences
+                        for _, e1, e2 in pairs:
+                            e1_type, e2_type = e1[1], e2[1]
+                            if r != 3:
+                                subj_type, obj_type = target_types[0], target_types[1]
+                                if ((e1_type == subj_type and e2_type == obj_type) or
+                                    (e1_type == obj_type and e2_type == subj_type)):
+                                    filtered.append((e1, e2))
+                            else:
+                                valid_locs = set(target_types[1:])
+                                if ((e1_type == "PERSON" and e2_type in valid_locs) or
+                                    (e2_type == "PERSON" and e1_type in valid_locs)):
+                                    filtered.append((e1, e2))
                         # loops through all entity pairs
-                        for _, subj_ent, obj_ent in pairs:
-                            # etract the subject and object text and entity types
+                        for _, subj_ent, obj_ent in filtered:
+                            # extract the subject and object text and entity types
                             subj_text, subj_type = subj_ent[0], subj_ent[1]
                             obj_text, obj_type = obj_ent[0], obj_ent[1]
                             marked = sent.text.replace(subj_text, f"[E1] {subj_text} [/E1]").replace(obj_text, f"[E2] {obj_text} [/E2]")
