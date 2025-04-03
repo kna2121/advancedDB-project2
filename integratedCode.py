@@ -118,19 +118,25 @@ Query          = {seed_query}
 # of Tuples    = {k}
 """)
 
-    print("Loading necessary libraries...")
+    # print("Loading necessary libraries...")
     nlp = spacy.load("en_core_web_sm")
 
     #initialize spanbert model
     if method == 'spanbert':
-        print("Loading SpanBERT model...")
+        # print("Loading SpanBERT model...")
+        # loads BERT tokenizer and config and pre trained weights from directory
+        
         tokenizer = BertTokenizer.from_pretrained("./pretrained_spanbert")
         config = BertConfig.from_pretrained("./pretrained_spanbert")
+
+        #Set  number of classification labels expected by  model
         config.num_labels = 42
         model = BertForSequenceClassification(config)
         state_dict = torch.load("./pretrained_spanbert/pytorch_model.bin", map_location="cpu")
         model.load_state_dict(state_dict)
         model.eval()
+
+        #relation labels used by the model from relations.txt
 
         with open("./pretrained_spanbert/relations.txt", "r") as f:
             labels = [line.strip() for line in f.readlines()]
@@ -225,16 +231,22 @@ Query          = {seed_query}
                                     print(f"==========")  
 
                     elif method == 'spanbert':
+
+                        # loops through all entity pairs
                         for _, subj_ent, obj_ent in pairs:
+                            # etract the subject and object text and entity types
                             subj_text, subj_type = subj_ent[0], subj_ent[1]
                             obj_text, obj_type = obj_ent[0], obj_ent[1]
                             marked = sent.text.replace(subj_text, f"[E1] {subj_text} [/E1]").replace(obj_text, f"[E2] {obj_text} [/E2]")
+                            #tokenize the  sentence for input to model
                             inputs = tokenizer(marked, return_tensors="pt", truncation=True, max_length=512)
+                            # run the model on the input without gradient tracking
                             with torch.no_grad():
                                 outputs = model(**inputs)
                                 probs = torch.nn.functional.softmax(outputs.logits, dim=-1)[0]
                                 pred_idx = torch.argmax(probs).item()
                                 pred_label = label_map[pred_idx]
+                                # extract the confidence score for  predicted label and determine if its valid based on expected label
                                 confidence = probs[pred_idx].item()
 
                                 if r == 3:
@@ -251,7 +263,7 @@ Query          = {seed_query}
                                         4: "org:top_members/employees"
                                     }
                                     is_valid = pred_label == target_labels[r]
-
+                                # if is valid and passes confidence threshold then we add to set
                                 if is_valid and confidence >= t:
                                     if (subj_text, obj_text) not in X:
                                         X.add(subj_text, obj_text,confidence)
