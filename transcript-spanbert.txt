@@ -203,7 +203,7 @@ URL (3/10): https://shorensteincenter.org/programs/fellowships/
 
 10 tuples extracted, stopping iteration.
 
-============ FINAL EXTRACTED RELATIONS (Top-10 out of total 26) ============
+============ FINAL EXTRACTED RELATIONS ============
 
 Subject: Harvard College    Object: Microsoft
 Subject: Harvard            Object: the Shorenstein Center
