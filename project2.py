@@ -249,7 +249,7 @@ Query          = {seed_query}
                                     filtered.append((e1, e2))
 
                         # loops through all entity pairs
-                        for _, subj_ent, obj_ent in pairs:
+                        for tokens, subj_ent, obj_ent in pairs:
                             # extract the subject and object text and entity types
                             subj_text, subj_type = subj_ent[0], subj_ent[1]
                             obj_text, obj_type = obj_ent[0], obj_ent[1]
@@ -284,9 +284,9 @@ Query          = {seed_query}
                                     if ((subj_text, obj_text)) not in X:
                                         X.add((subj_text, obj_text,confidence))
                                         print(f"\n=== Extracted Relation ===")
-                                        clean_sent = ''.join(char for char in str(sent) if ord(char) < 128)   #Removes non ASCII chars
-                                        print(f"\nSentence: {clean_sent} ")
+                                        print(f"\Tokens: {tokens} ")
                                         print(f"\t Subject: {subj_text} | Object:{obj_text} (conf={confidence})")
+                                        print(f"Adding to set of extracted relations")
                                         print(f"==========")  
 
 
@@ -310,7 +310,7 @@ Query          = {seed_query}
             if not candidates:
                 print("ISE has stalled.")
                 break
-            
+
             #generate new query
             y = candidates[0]
             queried.add(y)
