@@ -1,4 +1,4 @@
-(dbproj_local) (base) MacBook-Pro-1278:advancedDB-project2 kiraariyan$ python project2.py spanbert 2 0.7 "bill gates microsoft" 10
+spanbert 2 0.7 "bill gates microsoft" 10
 
 Parameters:
 Client key     = AIzaSyAYiEosxKFAa3cwpyN-Au3H7wRhZtAx8KY
@@ -180,9 +180,6 @@ URL (1/10): https://shorensteincenter.org/
         Annotating the webpage using spaCy...
         Extracted 26 sentences. Processing...
 
-✔ SpanBERT: PRIVACY → ACCESSIBILITY (conf=0.90)  
-✔ SpanBERT: ACCESSIBILITY → ACCESSIBILITY (conf=0.73)
-
 Adding to set of extracted relations
 ==========
 
@@ -192,8 +189,6 @@ URL (2/10): https://en.wikipedia.org/wiki/Shorenstein_Center_on_Media,_Politics_
         Webpage length (num characters): 10000
         Annotating the webpage using spaCy...
         Extracted 138 sentences. Processing...
-
-✔ SpanBERT: The Shorenstein Center → Harvard Kennedy School (conf=0.83)
 
 Adding to set of extracted relations
 ==========
