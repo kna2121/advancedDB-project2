@@ -13,13 +13,12 @@ b. Submitted Files
   
 c.
 
-sudo apt update
-sudo apt install -y python3 python3-pip python3.8-venv build-essential
 
+sudo apt update
+sudo apt install -y python3 python3-pip python3.10-venv build-essential
 
 python3 -m venv dbproj
 source dbproj/bin/activate
-
 
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
